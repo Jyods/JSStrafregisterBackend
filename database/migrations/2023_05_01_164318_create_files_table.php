@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('entry_id')->nullable();
-            $table->foreignId('author_id')->nullable();       
+            $table->foreignId('entry_id')->constrained();
+            $table->foreignId('member_id')->constrained();       
             $table->string('definition')->nullable();
             $table->date('date')->nullable();
             $table->string('description')->nullable();
             $table->string('fine')->nullable();
             $table->string('article')->nullable();
-            $table->boolean('isRestricted')->default(false);
+            $table->boolean('isRestricted')->default(0);
             $table->integer('restrictionClass')->nullable();
             $table->timestamps();
         });
