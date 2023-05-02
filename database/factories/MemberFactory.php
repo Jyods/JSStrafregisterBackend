@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\Member;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Member>
@@ -17,7 +18,9 @@ class MemberFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'identification' => $this->faker->firstNameMale(),
+            'age' => $this->faker->randomNumber(1,100),
+            'entry' => $this->faker->date(),
         ];
     }
 }
