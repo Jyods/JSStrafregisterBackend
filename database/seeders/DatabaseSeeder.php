@@ -21,10 +21,19 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        File::factory()
-        ->has(Member::factory(5))
-        ->has(Entry::factory(10))
-        ->count(3)
+
+        //Entry and Member factory has File factory
+        //Entry::factory()->count(30)->has(File::factory()->count(2))->create();
+        //Member::factory()->count(30)->has(File::factory()->count(2))->create();
+
+        Entry::factory()
+        ->count(30)
+        ->has(File::factory()->count(2))
         ->create();
+
+        /*Member::factory()
+        ->count(30)
+        ->has(File::factory()->count(2))
+        ->create();*/
     }
 }

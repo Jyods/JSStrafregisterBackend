@@ -12,4 +12,9 @@ class EntryController extends Controller
     {
         return EntryResource::collection(Entry::all());
     }
+
+    public function id(int $id)
+    {
+        return new EntryResource(Entry::find($id));
+    }
 }

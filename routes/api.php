@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('/files')->controller(EntryController::class)->group(function () {
     Route::get('/', 'index');
-    Route::get('/{id}', 'App\Http\Controllers\FileController@show');
+    Route::get('/{id}', 'id');
     Route::post('/', 'App\Http\Controllers\FileController@store');
     Route::put('/{id}', 'App\Http\Controllers\FileController@update');
     Route::delete('/{id}', 'App\Http\Controllers\FileController@destroy');
