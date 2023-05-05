@@ -23,6 +23,17 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        //Create first User with Password
+        User::factory()->create([
+            'name' => 'CT-6659',
+            'email' => 'test@test.com',
+            'password' => bcrypt('password'),
+            'identification' => 'CT-6659',
+            'age' => '30',
+            'restrictionClass' => '10',
+            'isActive' => True,
+        ]);
+
         //Entry and Member factory has File factory
         Entry::factory()->count(60)->create();
         User::factory()->count(30)->create();

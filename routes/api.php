@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EntryController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,10 +53,9 @@ Route::prefix('members')->controller(UserController::class)->group(function () {
     Route::delete('/{id}', 'App\Http\Controllers\UserController@destroy');
 });
 
-Route::prefix('auth')->controller(AuthController::class)->group(function () {
-    Route::post('/login', 'login');
-    Route::post('/register', 'register');
-    Route::post('/logout', 'logout');
-    Route::get('/user', 'user');
-    Route::get('auth', 'auth');
+Route::prefix('')->controller(LoginController::class)->group(function () {
+    Route::post('login', 'login');
+    Route::get('auth', 'checkAuth')->middleware('auth:sanctum');
+    Route::get('logout', 'logout')->middleware('auth:sanctum');
+    Route::get('secure', 'secureSite')->middleware('auth:sanctum');
 });
