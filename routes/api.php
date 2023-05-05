@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\FileController;
-use App\Http\Controllers\MemberController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\EntryController;
 
 /*
@@ -31,7 +31,7 @@ Route::prefix('/files')->controller(FileController::class)->group(function () {
 Route::prefix('/entries')->controller(EntryController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/{id}', 'id');
-    Route::post('/', 'App\Http\Controllers\EntryController@store');
+    Route::post('/create', 'store');
     Route::put('/{id}', 'App\Http\Controllers\EntryController@update');
     Route::delete('/{id}', 'App\Http\Controllers\EntryController@destroy');
 });
@@ -44,10 +44,18 @@ Route::prefix('/case')->controller(CaseController::class)->group(function () {
     Route::delete('/{id}', 'App\Http\Controllers\CaseController@destroy');
 });
 
-Route::prefix('members')->controller(MemberController::class)->group(function () {
+Route::prefix('members')->controller(UserController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/{id}', 'id');
-    Route::post('/', 'App\Http\Controllers\MemberController@store');
-    Route::put('/{id}', 'App\Http\Controllers\MemberController@update');
-    Route::delete('/{id}', 'App\Http\Controllers\MemberController@destroy');
+    Route::post('/', 'App\Http\Controllers\UserController@store');
+    Route::put('/{id}', 'App\Http\Controllers\UserController@update');
+    Route::delete('/{id}', 'App\Http\Controllers\UserController@destroy');
+});
+
+Route::prefix('auth')->controller(AuthController::class)->group(function () {
+    Route::post('/login', 'login');
+    Route::post('/register', 'register');
+    Route::post('/logout', 'logout');
+    Route::get('/user', 'user');
+    Route::get('auth', 'auth');
 });

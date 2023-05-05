@@ -17,4 +17,12 @@ class EntryController extends Controller
     {
         return new EntryResource(Entry::find($id));
     }
+    public function store(Request $request)
+    {
+        $entry = new Entry();
+        $entry->identification = $request->identification;
+        $entry->age = $request->age;
+        $entry->save();
+        return new EntryResource($entry);
+    }
 }

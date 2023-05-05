@@ -5,9 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Http\Resources\UserResource;
-
-class FileResource extends JsonResource
+class CaseResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,11 +14,13 @@ class FileResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $str = $this->description;
+        $str = preg_replace("/[a-zA-Z]/", "█", $str);
         return [
             'type' => 'Eintrag',
             'id' => $this->id,
             'definition' => $this->isRestricted ? 'Restricted' : $this->definition,
-            'description' => substr($this->description, 0, 40) . '...',
+            'description' => $this->isRestricted ? $str : $this->description,
             'date' => $this->isRestricted ? 'Restricted' : $this->date,
             'fine' => $this->isRestricted ? 'Restricted' : $this->fine,
             'article' => $this->isRestricted ? 'Restricted' : $this->article,

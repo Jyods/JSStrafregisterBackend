@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use App\Models\File;
 use App\Models\Member;
 use App\Models\Entry;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -23,12 +24,11 @@ class DatabaseSeeder extends Seeder
         // ]);
 
         //Entry and Member factory has File factory
-        //Entry::factory()->count(30)->has(File::factory()->count(2))->create();
-        //Member::factory()->count(30)->has(File::factory()->count(2))->create();
+        Entry::factory()->count(60)->create();
+        User::factory()->count(30)->create();
 
-        Entry::factory()
-        ->count(30)
-        ->has(File::factory()->count(2))
+        File::factory()
+        ->count(200)
         ->create();
 
         /*Member::factory()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\FileRequest;
+use App\Http\Resources\CaseResource;
 use App\Models\File;
 
 use App\Http\Resources\FileResource;
@@ -16,7 +17,7 @@ class FileController extends Controller
     }
     public function getid(int $id)
     {
-        return new FileResource(File::find($id));
+        return new CaseResource(File::find($id));
     }
     public function store(Request $request)
     {
@@ -28,7 +29,7 @@ class FileController extends Controller
         $file->isRestricted = $request->isRestricted;
         $file->description = $request->description;
         $file->restrictionClass = $request->restrictionClass;
-        $file->member_id = 1;
+        $file->user_id = 1;
         $file->entry_id = $request->entry_id;
         $file->save();
         return $file;
@@ -42,7 +43,7 @@ class FileController extends Controller
         $file->article = 'Testartikel';
         $file->isRestricted = false;
         $file->restrictionClass = 1;
-        $file->member_id = 1;
+        $file->user_id = 1;
         $file->entry_id = 1;
         $file->save();
         return new FileResource($file);

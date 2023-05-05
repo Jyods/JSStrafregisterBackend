@@ -10,9 +10,9 @@ class File extends Model
 {
     use HasFactory;
     //This belongs to member and entry
-    public function member()
+    public function user()
     {
-        return $this->belongsTo(Member::class);
+        return $this->belongsTo(User::class);
     }
     public function entry()
     {
