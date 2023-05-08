@@ -25,13 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::prefix('/files')->controller(FileController::class)->group(function () {
     Route::get('/', 'index');
-    Route::get('/id/{id}', 'getid');
+    Route::get('/id/{id}', 'getid')->middleware('auth:sanctum');
     Route::post('/create', 'store');
 });
 
 Route::prefix('/entries')->controller(EntryController::class)->group(function () {
     Route::get('/', 'index')->middleware('auth:sanctum');
-    Route::get('/{id}', 'id');
+    Route::get('/{id}', 'id')->middleware('auth:sanctum');
     Route::post('/create', 'store');
     Route::put('/{id}', 'App\Http\Controllers\EntryController@update');
     Route::delete('/{id}', 'App\Http\Controllers\EntryController@destroy');

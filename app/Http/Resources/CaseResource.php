@@ -5,6 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Http\Controllers\LoginController;
+
 class CaseResource extends JsonResource
 {
     /**
@@ -16,6 +18,38 @@ class CaseResource extends JsonResource
     {
         $str = $this->description;
         $str = preg_replace("/[a-zA-Z]/", "█", $str);
+        $class = LoginController::getUser();
+        if ($this->restrictionClass <= $class) {
+            return [
+                'type' => 'Eintrag',
+                'id' => $this->id,
+                'definition' => $this->definition,
+                'description' => $this->description,
+                'date' => $this->date,
+                'fine' => $this->fine,
+                'article' => $this->article,
+                'isRestricted' => $this->isRestricted,
+                'restrictionClass' => $this->restrictionClass,
+                'created_at' => $this->created_at,
+                'updated_at' => $this->updated_at,
+                'user' => new UserResource($this->user),
+            ];
+        } else {
+            return [
+                'type' => 'Eintrag',
+                'id' => $this->id,
+                'definition' => preg_replace("/[a-zA-Z]/", "█", $this->definition),
+                'description' => preg_replace("/[a-zA-Z]/", "█", $this->description),
+                'date' => 'Restricted',
+                'fine' => 'Restricted',
+                'article' => 'Restricted',
+                'isRestricted' => true,
+                'restrictionClass' => $this->restrictionClass,
+                'created_at' => 'Restricted',
+                'updated_at' => 'Restricted',
+                'user' => 'Restricted',
+            ];
+        }
         return [
             'type' => 'Eintrag',
             'id' => $this->id,

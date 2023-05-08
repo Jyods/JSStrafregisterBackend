@@ -23,6 +23,7 @@ class EntryController extends Controller
 
     public function id(int $id)
     {
+        $entry = Entry::find($id);
         return new EntryResource(Entry::find($id));
     }
     public function store(Request $request)
