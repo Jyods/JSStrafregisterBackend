@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('/files')->controller(FileController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/id/{id}', 'getid')->middleware('auth:sanctum');
-    Route::post('/create', 'store');
+    Route::post('/create', 'store')->middleware('auth:sanctum');
 });
 
 Route::prefix('/entries')->controller(EntryController::class)->group(function () {

@@ -21,6 +21,7 @@ class FileController extends Controller
     }
     public function store(Request $request)
     {
+        $user = $request->user();
         $file = new File();
         $file->definition = $request->definition;
         $file->date = $request->date;
@@ -29,7 +30,7 @@ class FileController extends Controller
         $file->isRestricted = $request->isRestricted;
         $file->description = $request->description;
         $file->restrictionClass = $request->restrictionClass;
-        $file->user_id = 1;
+        $file->user_id = $user->id;
         $file->entry_id = $request->entry_id;
         $file->save();
         return $file;
