@@ -41,4 +41,8 @@ class LoginController extends Controller
         $permissions = $user->restrictionClass;
         return response()->json(['data' => $permissions], 200);
     }
+    public static function getUser() {
+        $user = Auth::user();
+        return $user->restrictionClass;
+    }
 }

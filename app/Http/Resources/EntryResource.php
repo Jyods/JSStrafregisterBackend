@@ -22,8 +22,27 @@ class EntryResource extends JsonResource
             'id' => $this->id,
             'type' => 'Straftaeter',
             'identification' => $this->identification,
+            //add files that belongs to the entry, when the user restrictionClass is lower or equal to the file restrictionClass show the text, else show "Restricted"
             'files' => $this->files->map(function ($file) {
-                return new FileResource($file);
+                $class = LoginController::getUser();
+                if ($file->restrictionClass <= $class) {
+                    return new FileResource($file);
+                } else {
+                    return [
+                        'type' => 'Eintrag',
+                        'id' => $file->id,
+                        'definition' => 'Restricted',
+                        'description' => 'Restricted',
+                        'date' => 'Restricted',
+                        'fine' => 'Restricted',
+                        'article' => 'Restricted',
+                        'isRestricted' => true,
+                        'restrictionClass' => $file->restrictionClass,
+                        'created_at' => 'Restricted',
+                        'updated_at' => 'Restricted',
+                        'user' => 'Restricted',
+                    ];
+                }
             }),
         ];
     }

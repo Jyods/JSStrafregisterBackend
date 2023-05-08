@@ -10,14 +10,15 @@ class EntryController extends Controller
 {
     public function index(Request $request)
     {
-        //get the user from the request
+        /*get the user from the request
         $user = $request->user();
         $class = $user->restrictionClass;
-        //get all entries and files where the restrictionClass is lower or equal to the user restrictionClass
+        get all entries and files where the restrictionClass is lower or equal to the user restrictionClass
         $entries = Entry::whereHas('files', function ($query) use ($class) {
             $query->where('restrictionClass', '<=', $class);
         })->get();
-        return EntryResource::collection($entries);
+        return EntryResource::collection($entries);*/
+        return EntryResource::collection(Entry::all());
     }
 
     public function id(int $id)

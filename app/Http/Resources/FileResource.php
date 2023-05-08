@@ -19,6 +19,21 @@ class FileResource extends JsonResource
         return [
             'type' => 'Eintrag',
             'id' => $this->id,
+            'definition' => $this->definition,
+            'description' => substr($this->description, 0, 40) . '...',
+            'date' => $this->date,
+            'fine' => $this->fine,
+            'article' => $this->article,
+            'isRestricted' => false,
+            'isRestricted_Normal' => $this->isRestricted,
+            'restrictionClass' => $this->restrictionClass,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'user' => new UserResource($this->user),
+        ];
+        /*return [
+            'type' => 'Eintrag',
+            'id' => $this->id,
             'definition' => $this->isRestricted ? "Restricted" : $this->definition,
             'description' => substr($this->description, 0, 40) . '...',
             'date' => $this->isRestricted ? 'Restricted' : $this->date,
@@ -29,6 +44,6 @@ class FileResource extends JsonResource
             'created_at' => $this->isRestricted ? 'Restricted' : $this->created_at,
             'updated_at' => $this->isRestricted ? 'Restricted' : $this->updated_at,
             'user' => $this->isRestricted ? 'Restricted' : new UserResource($this->user),
-        ];
+        ];*/
     }
 }
