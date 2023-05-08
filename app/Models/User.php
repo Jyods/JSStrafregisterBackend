@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(File::class);
     }
+
+    public function getRestrictionClass()
+    {
+        return $this->restriction_class;
+    }
 }

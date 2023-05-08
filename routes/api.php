@@ -30,7 +30,7 @@ Route::prefix('/files')->controller(FileController::class)->group(function () {
 });
 
 Route::prefix('/entries')->controller(EntryController::class)->group(function () {
-    Route::get('/', 'index');
+    Route::get('/', 'index')->middleware('auth:sanctum');
     Route::get('/{id}', 'id');
     Route::post('/create', 'store');
     Route::put('/{id}', 'App\Http\Controllers\EntryController@update');
@@ -58,4 +58,5 @@ Route::prefix('')->controller(LoginController::class)->group(function () {
     Route::get('auth', 'checkAuth')->middleware('auth:sanctum');
     Route::get('logout', 'logout')->middleware('auth:sanctum');
     Route::get('secure', 'secureSite')->middleware('auth:sanctum');
+    Route::get('getPermissions', 'getRestrictionClass')->middleware('auth:sanctum');
 });

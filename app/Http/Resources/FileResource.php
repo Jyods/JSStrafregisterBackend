@@ -19,7 +19,7 @@ class FileResource extends JsonResource
         return [
             'type' => 'Eintrag',
             'id' => $this->id,
-            'definition' => $this->isRestricted ? 'Restricted' : $this->definition,
+            'definition' => $this->isRestricted ? "Restricted" : $this->definition,
             'description' => substr($this->description, 0, 40) . '...',
             'date' => $this->isRestricted ? 'Restricted' : $this->date,
             'fine' => $this->isRestricted ? 'Restricted' : $this->fine,

@@ -11,6 +11,10 @@ class LoginController extends Controller
     {
         if (Auth::attempt($request->only(['email', 'password']))) {
             $user = Auth::user();
+            //check if user is active
+            if (!$user->isActive) {
+                return response()->json(['message' => 'User is not active'], 401);
+            }
             $token = $user->createToken('auth_token')->plainTextToken;
             return response()->json(['token' => $token], 200);
             //return ['token' => $request->user()->createToken('auth_token')->plainTextToken];
@@ -25,10 +29,16 @@ class LoginController extends Controller
     }
     public function showLogin()
     {
-        return response()->json(['message' => 'Please login']);
+        return response()->json(['message' => 'Please login'], 401);
     }
     public function secureSite()
     {
-        return response()->json(['message' => 'You are logged in']);
+        return response()->json(['message' => 'You are logged in'], 200);
+    }
+    public function getRestrictionClass(Request $request)
+    {
+        $user = $request->user();
+        $permissions = $user->restrictionClass;
+        return response()->json(['data' => $permissions], 200);
     }
 }

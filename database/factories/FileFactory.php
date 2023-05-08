@@ -29,6 +29,7 @@ class FileFactory extends Factory
             'entry_id' => $this->faker->randomElement(Entry::get()),
             'user_id' => $this->faker->randomElement(User::get()),
             'isRestricted' => $this->faker->boolean(),
+            'restrictionClass' => $this->faker->randomNumber(1,10),
         ];
     }
 }

@@ -8,9 +8,16 @@ use App\Http\Resources\EntryResource;
 
 class EntryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return EntryResource::collection(Entry::all());
+        //get the user from the request
+        $user = $request->user();
+        $class = $user->restrictionClass;
+        //get all entries and files where the restrictionClass is lower or equal to the user restrictionClass
+        $entries = Entry::whereHas('files', function ($query) use ($class) {
+            $query->where('restrictionClass', '<=', $class);
+        })->get();
+        return EntryResource::collection($entries);
     }
 
     public function id(int $id)

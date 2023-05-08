@@ -34,6 +34,16 @@ class DatabaseSeeder extends Seeder
             'isActive' => True,
         ]);
 
+        User::factory()->create([
+            'name' => 'Jyods',
+            'email' => 'Jyods@test.com',
+            'password' => bcrypt('password'),
+            'identification' => 'Jyods',
+            'age' => '17',
+            'restrictionClass' => '2',
+            'isActive' => False,
+        ]);
+
         //Entry and Member factory has File factory
         Entry::factory()->count(60)->create();
         User::factory()->count(30)->create();
