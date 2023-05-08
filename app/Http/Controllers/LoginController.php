@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\User;
+use App\Http\Resources\UserResource;
+
+
 class LoginController extends Controller
 {
     public function login(Request $request)
@@ -44,5 +48,18 @@ class LoginController extends Controller
     public static function getUser() {
         $user = Auth::user();
         return $user->restrictionClass;
+    }
+    public static function register(Request $request) {
+        $user = new User();
+        $user->name = $request->identification;
+        $user->email = $request->email;
+        //hash password
+        $user->password = bcrypt($request->password);
+        $user->identification = $request->identification;
+        $user->age = $request->age;
+        $user->isActive = $request->isActive;
+        $user->restrictionClass = $request->restrictionClass;
+        $user->save();
+        return new UserResource($user);
     }
 }

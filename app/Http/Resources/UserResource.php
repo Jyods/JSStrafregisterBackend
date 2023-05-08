@@ -19,7 +19,11 @@ class UserResource extends JsonResource
             'type' => 'Beamter',
             'identification' => $this->identification,
             'age' => $this->age,
-            'is_active' => $this->is_active,
+            'isActive' => $this->isActive,
+            'restrictionClass' => $this->restrictionClass,
+            'email' => $this->email,
+            'name' => $this->name,
+            'password' => $this->password,
             'entry' => $this->entry,
         ];
     }

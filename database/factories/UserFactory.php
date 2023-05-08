@@ -26,6 +26,7 @@ class UserFactory extends Factory
             'identification' => $this->faker->firstNameMale(),
             'age' => $this->faker->randomNumber(1,100),
             'entry' => $this->faker->date(),
+            'isActive' => $this->faker->boolean(),
         ];
     }
 

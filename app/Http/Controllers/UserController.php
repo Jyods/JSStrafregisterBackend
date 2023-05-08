@@ -21,4 +21,17 @@ class UserController extends Controller
         $files = File::where('user_id', $id)->get();
         return new UserResource($user, $files);
     }
+    public function store(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = $request->password;
+        $user->identification = $request->identification;
+        $user->age = $request->age;
+        $user->isActive = $request->isActive;
+        $user->restrictionClass = $request->restrictionClass;
+        $user->save();
+        return new UserResource($user);
+    }
 }
