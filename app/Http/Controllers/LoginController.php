@@ -62,4 +62,8 @@ class LoginController extends Controller
         $user->save();
         return new UserResource($user);
     }
+    public static function logout(Request $request) {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'Logged out'], 200);
+    }
 }

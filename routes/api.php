@@ -48,7 +48,7 @@ Route::prefix('/case')->controller(CaseController::class)->group(function () {
 Route::prefix('members')->controller(UserController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/{id}', 'id');
-    Route::post('/', 'store');
+    //Route::post('/', 'store');
     Route::put('/{id}', 'App\Http\Controllers\UserController@update');
     Route::delete('/{id}', 'App\Http\Controllers\UserController@destroy');
 });
@@ -59,5 +59,5 @@ Route::prefix('')->controller(LoginController::class)->group(function () {
     Route::get('logout', 'logout')->middleware('auth:sanctum');
     Route::get('secure', 'secureSite')->middleware('auth:sanctum');
     Route::get('getPermissions', 'getRestrictionClass')->middleware('auth:sanctum');
-    Route::post('register', 'register');
+    Route::post('register', 'register')->middleware('auth:sanctum');
 });
