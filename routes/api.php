@@ -60,4 +60,5 @@ Route::prefix('')->controller(LoginController::class)->group(function () {
     Route::get('secure', 'secureSite')->middleware('auth:sanctum');
     Route::get('getPermissions', 'getRestrictionClass')->middleware('auth:sanctum');
     Route::post('register', 'register')->middleware('auth:sanctum');
+    Route::get('switchActive/{id}', 'switchActive')->middleware('auth:sanctum');
 });

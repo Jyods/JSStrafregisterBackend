@@ -66,4 +66,10 @@ class LoginController extends Controller
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logged out'], 200);
     }
+    public function switchActive(int $id) {
+        $user = User::find($id);
+        $user->isActive = !$user->isActive;
+        $user->save();
+        return new UserResource($user);
+    }
 }
