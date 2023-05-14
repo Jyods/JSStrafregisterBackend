@@ -7,6 +7,7 @@ use App\Http\Controllers\FileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LawController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,11 +31,20 @@ Route::prefix('/files')->controller(FileController::class)->group(function () {
 });
 
 Route::prefix('/entries')->controller(EntryController::class)->group(function () {
-    Route::get('/', 'index')->middleware('auth:sanctum');
-    Route::get('/{id}', 'id')->middleware('auth:sanctum');
+    Route::get('/index', 'index')->middleware('auth:sanctum');
+    Route::get('/index/{id}', 'id')->middleware('auth:sanctum');
     Route::post('/create', 'store');
     Route::put('/{id}', 'App\Http\Controllers\EntryController@update');
     Route::delete('/{id}', 'App\Http\Controllers\EntryController@destroy');
+    Route::get('/onlyEntry', 'onlyEntry')->middleware('auth:sanctum');
+});
+
+Route::prefix('/law')->controller(LawController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/{id}', 'id');
+    Route::post('/', 'App\Http\Controllers\LawController@store');
+    Route::put('/{id}', 'App\Http\Controllers\LawController@update');
+    Route::delete('/{id}', 'App\Http\Controllers\LawController@destroy');
 });
 
 Route::prefix('/case')->controller(CaseController::class)->group(function () {

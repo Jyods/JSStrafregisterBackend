@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Entry;
 use App\Http\Resources\EntryResource;
+use App\Http\Resources\OnlyEntryResource;
 
 class EntryController extends Controller
 {
@@ -33,5 +34,8 @@ class EntryController extends Controller
         $entry->age = $request->age;
         $entry->save();
         return new EntryResource($entry);
+    }
+    public function onlyEntry() {
+        return OnlyEntryResource::collection(Entry::all());
     }
 }

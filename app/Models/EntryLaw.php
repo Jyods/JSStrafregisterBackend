@@ -5,21 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
-class File extends Model
+class EntryLaw extends Model
 {
     use HasFactory;
-    //This belongs to member and entry
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+
     public function entry()
     {
         return $this->belongsTo(Entry::class);
     }
-    public function entryLaw()
+    public function law()
     {
-        return $this->hasMany(EntryLaw::class);
+        return $this->belongsTo(Law::class);
     }
 }

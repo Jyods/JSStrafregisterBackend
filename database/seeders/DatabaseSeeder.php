@@ -8,6 +8,8 @@ use App\Models\File;
 use App\Models\Member;
 use App\Models\Entry;
 use App\Models\User;
+use App\Models\Law;
+use App\Models\EntryLaw;
 
 class DatabaseSeeder extends Seeder
 {
@@ -41,7 +43,7 @@ class DatabaseSeeder extends Seeder
             'identification' => 'Jyods',
             'age' => '17',
             'restrictionClass' => '2',
-            'isActive' => False,
+            'isActive' => True,
         ]);
 
         //Entry and Member factory has File factory
@@ -49,6 +51,12 @@ class DatabaseSeeder extends Seeder
         User::factory()->count(30)->create();
 
         File::factory()
+        ->count(200)
+        ->create();
+
+        Law::factory(30)->create();
+
+        EntryLaw::factory()
         ->count(200)
         ->create();
 

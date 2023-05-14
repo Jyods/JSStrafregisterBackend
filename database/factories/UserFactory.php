@@ -17,13 +17,15 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $randomNumber = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        $name = "CT-". $randomNumber;
         return [
-            'name' => fake()->name(),
+            'name' => $name,
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'identification' => $this->faker->firstNameMale(),
+            'identification' => $name,
             'age' => $this->faker->randomNumber(1,100),
             'entry' => $this->faker->date(),
             'isActive' => $this->faker->boolean(),

@@ -7,6 +7,8 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Controllers\LoginController;
 
+use App\Http\Resources\EntryLawResource;
+
 class CaseResource extends JsonResource
 {
     /**

@@ -13,7 +13,7 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        if (Auth::attempt($request->only(['email', 'password']))) {
+        if (Auth::attempt($request->only(['identification', 'password']))) {
             $user = Auth::user();
             //check if user is active
             if (!$user->isActive) {
@@ -29,6 +29,10 @@ class LoginController extends Controller
     {
         //return $request->user(); and status code 200
         $user = $request->user();
+        //check if user is activ
+        if (!$user->isActive) {
+            return response()->json(['message' => 'User is not active'], 401);
+        }
         return response()->json(['data' => $user], 200);
     }
     public function showLogin()
@@ -49,7 +53,7 @@ class LoginController extends Controller
         $user = Auth::user();
         return $user->restrictionClass;
     }
-    public static function register(Request $request) {
+    public function register(Request $request) {
         $user = new User();
         $user->name = $request->identification;
         $user->email = $request->email;
@@ -62,7 +66,7 @@ class LoginController extends Controller
         $user->save();
         return new UserResource($user);
     }
-    public static function logout(Request $request) {
+    public function logout(Request $request) {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Logged out'], 200);
     }

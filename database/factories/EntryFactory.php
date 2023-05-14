@@ -17,8 +17,10 @@ class EntryFactory extends Factory
      */
     public function definition(): array
     {
+        $randomNumber = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+        $name = "CT-". $randomNumber;
         return [
-            'identification' => $this->faker->firstNameMale(),
+            'identification' => $name,
             'age' => $this->faker->randomNumber(1,100),
         ];
     }
