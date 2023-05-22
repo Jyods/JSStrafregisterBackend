@@ -9,7 +9,7 @@ use App\Models\Member;
 use App\Models\Entry;
 use App\Models\User;
 use App\Models\Law;
-use App\Models\EntryLaw;
+use App\Models\FileLaw;
 
 class DatabaseSeeder extends Seeder
 {
@@ -56,7 +56,7 @@ class DatabaseSeeder extends Seeder
 
         Law::factory(30)->create();
 
-        EntryLaw::factory()
+        FileLaw::factory()
         ->count(200)
         ->create();
 

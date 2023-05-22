@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entry_laws', function (Blueprint $table) {
+        Schema::create('file_laws', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('entry_id')->constrained();
+            $table->foreignId('file_id')->constrained();
             $table->foreignId('law_id')->constrained();
             $table->timestamps();
         });

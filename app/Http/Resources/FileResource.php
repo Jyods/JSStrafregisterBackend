@@ -7,6 +7,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Resources\UserResource;
 
+use App\Http\Resources\FileLawResource;
+use App\Models\FileLaw;
+
 class FileResource extends JsonResource
 {
     /**
@@ -30,6 +33,7 @@ class FileResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'user' => new UserResource($this->user),
+            'laws' => FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
         ];
         /*return [
             'type' => 'Eintrag',

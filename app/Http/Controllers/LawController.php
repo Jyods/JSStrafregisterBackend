@@ -13,4 +13,8 @@ class LawController extends Controller
     {
         return LawResource::collection(Law::all());
     }
+    public function id(int $id)
+    {
+        return new LawResource(Law::find($id));
+    }
 }

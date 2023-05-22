@@ -7,7 +7,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Controllers\LoginController;
 
-use App\Http\Resources\EntryLawResource;
+use App\Http\Resources\LawResource;
+use App\Http\Resources\FileLawResource;
+use App\Models\FileLaw;
 
 class CaseResource extends JsonResource
 {
@@ -35,6 +37,7 @@ class CaseResource extends JsonResource
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
                 'user' => new UserResource($this->user),
+                'laws' => FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
             ];
         } else {
             return [
@@ -50,11 +53,11 @@ class CaseResource extends JsonResource
                 'created_at' => 'Restricted',
                 'updated_at' => 'Restricted',
                 'user' => 'Restricted',
+                'laws' => 'Restricted',
             ];
         }
         return [
             'type' => 'Eintrag',
-            'id' => $this->id,
             'definition' => $this->isRestricted ? 'Restricted' : $this->definition,
             'description' => $this->isRestricted ? $str : $this->description,
             'date' => $this->isRestricted ? 'Restricted' : $this->date,
@@ -65,6 +68,7 @@ class CaseResource extends JsonResource
             'created_at' => $this->isRestricted ? 'Restricted' : $this->created_at,
             'updated_at' => $this->isRestricted ? 'Restricted' : $this->updated_at,
             'user' => $this->isRestricted ? 'Restricted' : new UserResource($this->user),
+            'laws' => $this->isRestricted ? 'Restricted' : FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
         ];
     }
 }

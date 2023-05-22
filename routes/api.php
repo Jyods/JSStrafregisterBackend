@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LawController;
+use App\Http\Controllers\FileLawController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,14 @@ Route::prefix('/law')->controller(LawController::class)->group(function () {
     Route::post('/', 'App\Http\Controllers\LawController@store');
     Route::put('/{id}', 'App\Http\Controllers\LawController@update');
     Route::delete('/{id}', 'App\Http\Controllers\LawController@destroy');
+});
+
+Route::prefix('/filelaw')->controller(FileLawController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/{id}', 'id');
+    Route::post('/', 'App\Http\Controllers\FileLawController@store');
+    Route::put('/{id}', 'App\Http\Controllers\FileLawController@update');
+    Route::delete('/{id}', 'App\Http\Controllers\FileLawController@destroy');
 });
 
 Route::prefix('/case')->controller(CaseController::class)->group(function () {

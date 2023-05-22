@@ -15,6 +15,7 @@ class LawResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'Paragraph' => $this->Paragraph,
             'Title' => $this->Title,
             'Category' => $this->Category,

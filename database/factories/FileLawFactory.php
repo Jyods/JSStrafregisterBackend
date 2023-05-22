@@ -4,13 +4,13 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-use App\Models\Entry;
+use App\Models\File;
 use App\Models\Law;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\EntryLaw>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\FileLaw>
  */
-class EntryLawFactory extends Factory
+class FileLawFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -20,7 +20,7 @@ class EntryLawFactory extends Factory
     public function definition(): array
     {
         return [
-            'entry_id' => $this->faker->randomElement(Entry::get()),
+            'file_id' => $this->faker->randomElement(File::get()),
             'law_id' => $this->faker->randomElement(Law::get()),
         ];
     }

@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EntryLaw extends Model
+class FileLaw extends Model
 {
     use HasFactory;
 
-    public function entry()
+    public function file()
     {
-        return $this->belongsTo(Entry::class);
+        return $this->belongsTo(File::class);
     }
     public function law()
     {
