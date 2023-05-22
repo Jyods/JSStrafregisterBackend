@@ -9,8 +9,8 @@ class Law extends Model
 {
     use HasFactory;
 
-    public function entryLaw()
+    public function fileLaw()
     {
-        return $this->hasMany(EntryLaw::class);
+        return $this->hasMany(FileLaw::class);
     }
 }
