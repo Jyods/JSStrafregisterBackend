@@ -51,7 +51,7 @@ Route::prefix('/law')->controller(LawController::class)->group(function () {
 Route::prefix('/filelaw')->controller(FileLawController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/{id}', 'id');
-    Route::post('/', 'App\Http\Controllers\FileLawController@store');
+    Route::post('/', 'store');
     Route::put('/{id}', 'App\Http\Controllers\FileLawController@update');
     Route::delete('/{id}', 'App\Http\Controllers\FileLawController@destroy');
 });

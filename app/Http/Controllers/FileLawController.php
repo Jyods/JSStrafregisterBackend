@@ -18,4 +18,13 @@ class FileLawController extends Controller
     {
         return FileLawResource::collection(FileLaw::where('file_id', $id)->get());
     }
+    public function store(Request $request)
+    {
+        $filelaw = new FileLaw();
+        $filelaw->file_id = $request->file_id;
+        $law = Law::where('Paragraph', $request->paragraph)->first();
+        $filelaw->law_id = $law->id;
+        $filelaw->save();
+        return new FileLawResource($filelaw);
+    }
 }
