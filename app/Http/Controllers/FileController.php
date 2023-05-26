@@ -26,7 +26,6 @@ class FileController extends Controller
         $file->definition = $request->definition;
         $file->date = $request->date;
         $file->fine = $request->fine;
-        $file->article = $request->article;
         $file->isRestricted = $request->isRestricted;
         $file->description = $request->description;
         $file->restrictionClass = $request->restrictionClass;
@@ -41,7 +40,6 @@ class FileController extends Controller
         $file->definition = 'Testdefinition';
         $file->date = '2021-01-01';
         $file->fine = 100;
-        $file->article = 'Testartikel';
         $file->isRestricted = false;
         $file->restrictionClass = 1;
         $file->user_id = 1;

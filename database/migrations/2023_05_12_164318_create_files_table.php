@@ -19,7 +19,6 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->string('description')->nullable();
             $table->string('fine')->nullable();
-            $table->string('article')->nullable();
             $table->boolean('isRestricted')->default(0);
             $table->integer('restrictionClass')->nullable();
             $table->timestamps();

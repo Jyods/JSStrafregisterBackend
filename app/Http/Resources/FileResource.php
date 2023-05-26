@@ -26,7 +26,6 @@ class FileResource extends JsonResource
             'description' => substr($this->description, 0, 40) . '...',
             'date' => $this->date,
             'fine' => $this->fine,
-            'article' => $this->article,
             'isRestricted' => false,
             'isRestricted_Normal' => $this->isRestricted,
             'restrictionClass' => $this->restrictionClass,

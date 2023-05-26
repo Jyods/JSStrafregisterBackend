@@ -25,7 +25,6 @@ class FileFactory extends Factory
             'date' => $this->faker->date(),
             'description' => $this->faker->realTextBetween(50, 100),
             'fine' => $this->faker->randomNumber(1,10000),
-            'article' => $this->faker->randomNumber(1,10),
             'entry_id' => $this->faker->randomElement(Entry::get()),
             'user_id' => $this->faker->randomElement(User::get()),
             'isRestricted' => $this->faker->boolean(),
