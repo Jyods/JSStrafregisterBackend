@@ -5,6 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Http\Resources\RankResource;
+
 class UserResource extends JsonResource
 {
     /**
@@ -25,6 +27,9 @@ class UserResource extends JsonResource
             'name' => $this->name,
             'password' => $this->password,
             'entry' => $this->entry,
+            //get the rank name from the rank_id
+            'rank_id' => $this->rank_id,
+            'rank' => new RankResource($this->rank),
         ];
     }
 }

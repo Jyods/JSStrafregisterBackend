@@ -10,6 +10,7 @@ use App\Models\Entry;
 use App\Models\User;
 use App\Models\Law;
 use App\Models\FileLaw;
+use App\Models\Rank;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,6 +26,15 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        $ranks = ["Private","Corporal","Sergeant","Lieutenant","Captain","Major","Colonel","General","Commander","Marshal","Supreme Commander","High General","Commander-in-Chief","High Marshal","High General","High Commander"];
+
+        //Create as much ranks as there are in the array
+        foreach ($ranks as $rank) {
+            Rank::factory()->create([
+                'rank' => $rank,
+            ]);
+        }
+
         //Create first User with Password
         User::factory()->create([
             'name' => 'CT-6659',
@@ -34,6 +44,7 @@ class DatabaseSeeder extends Seeder
             'age' => '30',
             'restrictionClass' => '10',
             'isActive' => True,
+            'rank_id' => '15'
         ]);
 
         User::factory()->create([
@@ -44,6 +55,7 @@ class DatabaseSeeder extends Seeder
             'age' => '17',
             'restrictionClass' => '2',
             'isActive' => True,
+            'rank_id' => '1'
         ]);
 
         //Entry and Member factory has File factory
@@ -59,6 +71,9 @@ class DatabaseSeeder extends Seeder
         FileLaw::factory()
         ->count(200)
         ->create();
+
+        
+
 
         /*Member::factory()
         ->count(30)

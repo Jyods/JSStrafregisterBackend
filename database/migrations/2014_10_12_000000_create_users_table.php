@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('reason')->nullable();
             $table->integer('restrictionClass')->default(0);
             $table->boolean('isActive')->default(true);
+            $table->foreignId('rank_id')->constrained()->nullable();
             $table->timestamps();
         });
     }

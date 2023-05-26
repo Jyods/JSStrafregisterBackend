@@ -5,6 +5,8 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
+use App\Models\Rank;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
@@ -29,6 +31,7 @@ class UserFactory extends Factory
             'age' => $this->faker->randomNumber(1,100),
             'entry' => $this->faker->date(),
             'isActive' => $this->faker->boolean(),
+            'rank_id' => $this->faker->randomElement(Rank::get()),
         ];
     }
 
