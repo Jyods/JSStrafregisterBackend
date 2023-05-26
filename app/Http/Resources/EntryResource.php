@@ -35,7 +35,6 @@ class EntryResource extends JsonResource
                         'description' => 'Restricted',
                         'date' => 'Restricted',
                         'fine' => 'Restricted',
-                        'article' => 'Restricted',
                         'isRestricted' => true,
                         'restrictionClass' => $file->restrictionClass,
                         'created_at' => 'Restricted',
