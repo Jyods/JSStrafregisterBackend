@@ -81,3 +81,7 @@ Route::prefix('')->controller(LoginController::class)->group(function () {
     Route::post('register', 'register')->middleware('auth:sanctum');
     Route::get('switchActive/{id}', 'switchActive')->middleware('auth:sanctum');
 });
+
+Route::prefix('/ranks')->controller(RankController::class)->group(function () {
+    Route::get('/', 'index');
+});
