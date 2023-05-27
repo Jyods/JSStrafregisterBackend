@@ -41,7 +41,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@test.com',
             'password' => bcrypt('password'),
             'identification' => 'CT-6659',
-            'age' => '30',
             'restrictionClass' => '10',
             'isActive' => True,
             'rank_id' => '15'
@@ -52,24 +51,23 @@ class DatabaseSeeder extends Seeder
             'email' => 'Jyods@test.com',
             'password' => bcrypt('password'),
             'identification' => 'Jyods',
-            'age' => '17',
             'restrictionClass' => '2',
             'isActive' => True,
             'rank_id' => '1'
         ]);
 
         //Entry and Member factory has File factory
-        Entry::factory()->count(60)->create();
-        User::factory()->count(30)->create();
+        Entry::factory()->count(20)->create();
+        User::factory()->count(5)->create();
 
         File::factory()
-        ->count(200)
+        ->count(50)
         ->create();
 
-        Law::factory(30)->create();
+        Law::factory(20)->create();
 
         FileLaw::factory()
-        ->count(200)
+        ->count(100)
         ->create();
 
         

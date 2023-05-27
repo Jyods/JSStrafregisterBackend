@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->string('identification');
-            $table->integer('age');
             $table->date('entry')->default(now());
             $table->date('departure')->nullable();
             $table->string('reason')->nullable();

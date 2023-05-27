@@ -20,7 +20,6 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'type' => 'Beamter',
             'identification' => $this->identification,
-            'age' => $this->age,
             'isActive' => $this->isActive,
             'restrictionClass' => $this->restrictionClass,
             'email' => $this->email,

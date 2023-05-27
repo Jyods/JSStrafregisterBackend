@@ -9,6 +9,7 @@ use App\Http\Controllers\EntryController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LawController;
 use App\Http\Controllers\FileLawController;
+use App\Http\Controllers\RankController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,12 @@ use App\Http\Controllers\FileLawController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    $user = $request->user();
+    $data = [
+        'user' => $user,
+        'rank' => $user->rank,
+    ];
+    return $user;
 });
 
 Route::prefix('/files')->controller(FileController::class)->group(function () {
@@ -67,8 +73,7 @@ Route::prefix('/case')->controller(CaseController::class)->group(function () {
 Route::prefix('members')->controller(UserController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/{id}', 'id');
-    //Route::post('/', 'store');
-    Route::put('/{id}', 'App\Http\Controllers\UserController@update');
+    Route::put('/', 'update');
     Route::delete('/{id}', 'App\Http\Controllers\UserController@destroy');
 });
 

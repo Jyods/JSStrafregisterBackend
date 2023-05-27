@@ -19,7 +19,6 @@ class MemberFactory extends Factory
     {
         return [
             'identification' => $this->faker->firstNameMale(),
-            'age' => $this->faker->randomNumber(1,100),
             'entry' => $this->faker->date(),
         ];
     }
