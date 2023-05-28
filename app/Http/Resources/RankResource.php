@@ -15,6 +15,7 @@ class RankResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'rank' => $this->rank,
         ];
     }

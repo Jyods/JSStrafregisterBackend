@@ -71,9 +71,9 @@ Route::prefix('/case')->controller(CaseController::class)->group(function () {
 });
 
 Route::prefix('members')->controller(UserController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::get('/{id}', 'id');
-    Route::put('/', 'update');
+    Route::get('/', 'index')->middleware('auth:sanctum');
+    Route::get('/{id}', 'id')->middleware('auth:sanctum');
+    Route::put('/', 'update')->middleware('auth:sanctum');
     Route::delete('/{id}', 'App\Http\Controllers\UserController@destroy');
 });
 

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Entry;
 use App\Models\Member;
 use App\Models\User;
+use App\Models\Rank;
 
 
 /**
@@ -29,6 +30,7 @@ class FileFactory extends Factory
             'user_id' => $this->faker->randomElement(User::get()),
             'isRestricted' => $this->faker->boolean(),
             'restrictionClass' => $this->faker->randomNumber(1,10),
+            'rank_id' => $this->faker->randomElement(Rank::get()),
         ];
     }
 }

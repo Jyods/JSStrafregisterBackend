@@ -12,4 +12,8 @@ class Rank extends Model
     {
         return $this->hasMany(User::class);
     }
+    public function file()
+    {
+        return $this->hasMany(File::class);
+    }
 }

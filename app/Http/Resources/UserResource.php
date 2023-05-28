@@ -24,7 +24,7 @@ class UserResource extends JsonResource
             'restrictionClass' => $this->restrictionClass,
             'email' => $this->email,
             'name' => $this->name,
-            'password' => $this->password,
+            //'password' => $this->password,
             'entry' => $this->entry,
             //get the rank name from the rank_id
             'rank_id' => $this->rank_id,

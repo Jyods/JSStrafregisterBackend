@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Resources\LawResource;
 use App\Http\Resources\FileLawResource;
 use App\Models\FileLaw;
+use App\Models\Rank;
 
 class CaseResource extends JsonResource
 {
@@ -37,6 +38,7 @@ class CaseResource extends JsonResource
                 'updated_at' => $this->updated_at,
                 'user' => new UserResource($this->user),
                 'laws' => FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
+                'rank' => RankResource::collection(Rank::where('id', $this->rank_id)->get()),
             ];
         } else {
             return [
@@ -52,6 +54,7 @@ class CaseResource extends JsonResource
                 'updated_at' => 'Restricted',
                 'user' => 'Restricted',
                 'laws' => 'Restricted',
+                'rank' => 'Restricted',
             ];
         }
         return [
@@ -66,6 +69,7 @@ class CaseResource extends JsonResource
             'updated_at' => $this->isRestricted ? 'Restricted' : $this->updated_at,
             'user' => $this->isRestricted ? 'Restricted' : new UserResource($this->user),
             'laws' => $this->isRestricted ? 'Restricted' : FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
+            'rank' => $this->isRestricted ? 'Restricted' : RankResource::collection(Rank::where('id', $this->rank_id)->get()),
         ];
     }
 }

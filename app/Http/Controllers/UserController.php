@@ -42,6 +42,7 @@ class UserController extends Controller
         $user->identification = $request->identification ?? $user->identification;
         $user->isActive = $request->isActive ?? $user->isActive;
         $user->restrictionClass = $request->restrictionClass ?? $user->restrictionClass;
+        $user->rank_id = $request->rank_id ?? $user->rank_id;
         $user->save();
         return new UserResource($user);
     }
