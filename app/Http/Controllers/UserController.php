@@ -7,6 +7,9 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use App\Models\File;
 
+use App\Mail\UpdateEmail;
+use Illuminate\Support\Facades\Mail;
+
 class UserController extends Controller
 {
     public function index()
@@ -36,6 +39,7 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
+        $old_values = User::find($request->id);
         $user = User::find($request->id);
         $user->email = $request->email ?? $user->email;
         $user->password = $request->password ?? $user->password;
@@ -44,6 +48,7 @@ class UserController extends Controller
         $user->restrictionClass = $request->restrictionClass ?? $user->restrictionClass;
         $user->rank_id = $request->rank_id ?? $user->rank_id;
         $user->save();
+        Mail::to($user->email)->send(new UpdateEmail($old_values, $user, $request->user()->identification));
         return new UserResource($user);
     }
 }
