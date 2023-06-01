@@ -20,6 +20,21 @@
             font-size: 0.5rem;
 
         }
+        h1 {
+            font-size: 2rem;
+        }
+        /*Add stuff for Phone users*/
+        @media only screen and (max-width: 600px) {
+            body {
+                font-size: 0.7rem;
+            }
+            .body {
+                padding: 0.7rem;
+            }
+            h1 {
+                font-size: 1.2rem;
+            }
+        }
     </style>
     <title>Registrierungs Bestätigung</title>
 </head>
@@ -32,6 +47,8 @@
             <p>Ihr Benutzername lautet: {{$name}}</p>
             <p>Ihr Passwort lautet: {{$password}}</p>
             <br />
+            <br />
+            <p>Beachten Sie dass Ihr Supervisor Ihr Passwort einsehen kann.</p>
             <br />
             <p>Bitte klicken Sie auf den Link um sich einzuloggen.</p>
             <a href="http://localhost:3000/login">Login</a>
