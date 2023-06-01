@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $user;
 });
 
+
 Route::prefix('/files')->controller(FileController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/id/{id}', 'getid')->middleware('auth:sanctum');

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Http\Resources\UserResource;
 
+use App\Mail\WelcomeEmail;
+use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
@@ -55,15 +57,17 @@ class LoginController extends Controller
     }
     public function register(Request $request) {
         $user = new User();
-        $user->name = $request->identification;
-        $user->email = $request->email;
+        $user->name = $request->identification ?? 'no name';
+        $user->email = $request->email ?? 'no email';
         //hash password
-        $user->password = bcrypt($request->password);
-        $user->identification = $request->identification;
-        $user->age = $request->age;
-        $user->isActive = $request->isActive;
-        $user->restrictionClass = $request->restrictionClass;
+        $user->password = bcrypt($request->password) ?? 'no password';
+        $user->identification = $request->identification ?? 'no identification';
+        $user->isActive = $request->isActive ?? true;
+        $user->restrictionClass = $request->restrictionClass ?? 1;
+        //get rank_id from rank object
+        $user->rank_id = $request->rank_id;
         $user->save();
+        Mail::to($request->email)->send(new WelcomeEmail($request->identification, $request->password, $request->creator_name));
         return new UserResource($user);
     }
     public function logout(Request $request) {
