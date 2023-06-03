@@ -79,7 +79,7 @@ Route::prefix('members')->controller(UserController::class)->group(function () {
 });
 
 Route::prefix('')->controller(LoginController::class)->group(function () {
-    Route::post('login', 'login');
+    Route::post('login', 'login')->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
     Route::get('auth', 'checkAuth')->middleware('auth:sanctum');
     Route::get('logout', 'logout')->middleware('auth:sanctum');
     Route::get('secure', 'secureSite')->middleware('auth:sanctum');
