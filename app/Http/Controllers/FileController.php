@@ -31,6 +31,7 @@ class FileController extends Controller
         $file->restrictionClass = $request->restrictionClass;
         $file->user_id = $user->id;
         $file->entry_id = $request->entry_id;
+        $file->rank_id = $request->rank_id;
         $file->save();
         return $file;
     }
