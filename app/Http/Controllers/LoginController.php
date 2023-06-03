@@ -15,8 +15,6 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
-        //return all users
-        return UserResource::collection(User::all());
         if (Auth::attempt($request->only(['identification', 'password']))) {
             $user = Auth::user();
             //check if user is active
