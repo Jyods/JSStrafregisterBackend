@@ -15,6 +15,7 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
+        return response()->json(['message' => $request], 401);
         if (Auth::attempt($request->only(['identification', 'password']))) {
             $user = Auth::user();
             //check if user is active
