@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
             $table->string('rank');
-            $rable->string('kader');
+            $table->string('kader');
             $table->string('unit');
             $table->timestamps();
         });
