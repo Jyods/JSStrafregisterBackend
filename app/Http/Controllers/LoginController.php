@@ -15,8 +15,8 @@ class LoginController extends Controller
 {
     public function login(Request $request)
     {
+        return response()->json(['identification' => $request->identification, 'password' => $request->password]);
         if (Auth::attempt($request->only(['identification', 'password']))) {
-            return response()->json(['message' => 'Login successful'], 200);
             $user = Auth::user();
             //check if user is active
             if (!$user->isActive) {
