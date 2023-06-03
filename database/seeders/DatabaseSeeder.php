@@ -26,12 +26,171 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        $ranks = ["Private","Corporal","Sergeant","Lieutenant","Captain","Major","Colonel","General","Commander","Marshal","Supreme Commander","High General","Commander-in-Chief","High Marshal","High General","High Commander"];
+        //erstelle eine Variable mit einem Array voller Rang Objekten
+        $ranks = [
+            (object) [
+                'rank' => 'Private',
+                'kader' => 'Enlisted',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Private First Class',
+                'kader' => 'Enlisted',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Specialist',
+                'kader' => 'Enlisted',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Lance Corporal',
+                'kader' => 'Enlisted',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Corporal',
+                'kader' => 'Junior NCO',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Sergeant',
+                'kader' => 'Junior NCO',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Staff Sergeant',
+                'kader' => 'Junior NCO',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Technical Sergeant',
+                'kader' => 'Senior NCO',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Master Sergeant',
+                'kader' => 'Senior NCO',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'First Sergeant',
+                'kader' => 'Senior NCO',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Sergeant Major',
+                'kader' => 'Senior NCO',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => '2nd Lieutenant',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => '1st Lieutenant',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Captain',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Major',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Commander',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Senior Commander',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Marshal Commander',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Colonel',
+                'kader' => 'High Command',
+                'unit' => 'Clone Army',
+            ],
+            (object) [
+                'rank' => 'Crewman',
+                'kader' => 'Enlisted',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Petty Officer',
+                'kader' => 'Enlisted',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Chief Petty Officer',
+                'kader' => 'Enlisted',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Warrent Officer',
+                'kader' => 'Junior NCO',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Chief Warrent Officer',
+                'kader' => 'Junior NCO',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Ensign',
+                'kader' => 'Junior NCO',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Mindshipman',
+                'kader' => 'Senior NCO',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Lieutenant',
+                'kader' => 'Senior NCO',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Lieutenant Commander',
+                'kader' => 'Senior NCO',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Commander',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Captain',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Navy',
+            ],
+            (object) [
+                'rank' => 'Commodore',
+                'kader' => 'Commissioned Officer',
+                'unit' => 'Navy',
+            ]
+        ];
 
         //Create as much ranks as there are in the array
         foreach ($ranks as $rank) {
             Rank::factory()->create([
-                'rank' => $rank,
+                'rank' => $rank->rank,
+                'kader' => $rank->kader,
+                'unit' => $rank->unit,
             ]);
         }
 
