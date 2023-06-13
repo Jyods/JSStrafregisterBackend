@@ -29,10 +29,16 @@ class LoginController extends Controller
     }
     public function checkAuth(Request $request)
     {
-        //check if the Bearer token is valid and return 401 if not
-        $tokenIsValid = $request->user()->currentAccessToken()->tokenable_id == $request->user()->id;
+        $token = $request->bearerToken();
 
-        return response()->json(['tokenIsValid' => $tokenIsValid], 200);
+        if ($token) {
+            if(Auth::guard('api')->check())
+            {
+                return response()->json(['message' => 'You are logged in'], 200);
+            }
+        }
+
+        return response()->json(['message' => 'Please login'], 401);
 
         //return $request->user(); and status code 200
         $user = $request->user();
