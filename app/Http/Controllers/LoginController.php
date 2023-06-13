@@ -29,6 +29,11 @@ class LoginController extends Controller
     }
     public function checkAuth(Request $request)
     {
+        //check if the Bearer token is valid and return 401 if not
+        $tokenIsValid = $request->user()->currentAccessToken()->tokenable_id == $request->user()->id;
+
+        return response()->json(['tokenIsValid' => $tokenIsValid], 200);
+
         //return $request->user(); and status code 200
         $user = $request->user();
         //check if user is activ
