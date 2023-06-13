@@ -23,8 +23,8 @@ class Authenticate extends Middleware
      * @param array  $guards
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function unauthenticated($request, array $guards)
+    /*protected function unauthenticated($request, array $guards)
     {
         return new JsonResponse(['error' => 'Unauthenticated.'], 401);
-    }
+    }*/
 }
