@@ -32,13 +32,11 @@ class LoginController extends Controller
         $token = $request->bearerToken();
 
         if ($token) {
-            if(Auth::guard('api')->check())
+            if(!Auth::guard('api')->check())
             {
-                return response()->json(['message' => 'You are logged in'], 200);
+                return response()->json(['message' => 'Please login'], 401);
             }
         }
-
-        return response()->json(['message' => 'Please login'], 401);
 
         //return $request->user(); and status code 200
         $user = $request->user();
