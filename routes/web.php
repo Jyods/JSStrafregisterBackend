@@ -18,5 +18,5 @@ Route::get('/', function () {
 });
 
 Route::get('login', function () {
-    return 'You are not logged in';
-});
+    return response()->json(['message' => 'Please login'], 401);
+})->name('login');
