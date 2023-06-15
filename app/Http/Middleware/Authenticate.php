@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Auth\AuthenticationException;
+use Laravel\Sanctum\Exceptions\NotAuthenticatedException;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
@@ -24,8 +25,12 @@ class Authenticate extends Middleware
      * @param array  $guards
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function unauthenticated($request, array $guards)
+    protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return new JsonResponse(['error' => 'Unauthenticated.'], 401);
+        if ($exception instanceof NotAuthenticatedException) {
+            return response()->json(['error' => 'Unauthenticated.'], 401);
+        }
+
+        return parent::unauthenticated($request, $exception);
     }
 }
