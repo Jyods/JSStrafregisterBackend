@@ -80,7 +80,7 @@ Route::prefix('members')->controller(UserController::class)->group(function () {
 
 Route::prefix('')->controller(LoginController::class)->group(function () {
     Route::post('login', 'login');
-    Route::get('auth', 'checkAuth');
+    Route::get('auth', 'checkAuth')->middleware('auth:sanctum');
     Route::get('logout', 'logout')->middleware('auth:sanctum');
     Route::get('secure', 'secureSite')->middleware('auth:sanctum');
     Route::get('getPermissions', 'getRestrictionClass')->middleware('auth:sanctum');
