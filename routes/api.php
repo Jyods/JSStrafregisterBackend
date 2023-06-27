@@ -109,8 +109,8 @@ Route::prefix('/discord')->group(function () {
 });
 
 //erstelle eine Route /generate die einfach 200 zurückgibt
-Route::get('/generate', function (Request $request) {
-    
+Route::post('/generate', function (Request $request) {
+
     $client = new Client();
 
     try {
