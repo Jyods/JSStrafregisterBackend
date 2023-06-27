@@ -11,6 +11,10 @@ use App\Http\Controllers\LawController;
 use App\Http\Controllers\FileLawController;
 use App\Http\Controllers\RankController;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
+
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -91,3 +95,38 @@ Route::prefix('')->controller(LoginController::class)->group(function () {
 Route::prefix('/ranks')->controller(RankController::class)->group(function () {
     Route::get('/', 'index');
 });
+
+Route::prefix('/discord')->group(function () {
+    Route::get('/test', function (Request $request) {
+
+    return response()->json(['message' => 'Passed'], 200);
+    })->middleware('discord.bot');
+
+    Route::get('/ranks', function (Request $request) {
+        $ranks = \App\Models\Rank::all();
+        return response()->json(['message' => $ranks], 200);
+    })->middleware('discord.bot');
+});
+
+//erstelle eine Route /generate die einfach 200 zurückgibt
+Route::get('/generate', function (Request $request) {
+    
+    $client = new Client();
+
+    try {
+        $response = $client->request('POST', 'https://api.prodia.com/v1/job', [
+            'body' => $request->getContent(),
+            'headers' => [
+                'X-Prodia-Key' => '022ee431-4073-424c-8298-68cb75352785',
+                'accept' => 'application/json',
+                'content-type' => 'application/json',
+            ],
+        ]);
+
+        return $response->getBody();
+    } catch (RequestException $e) {
+        return $e->getResponse()->getBody();
+    }
+    return response()->json(['message' => 'Passed'], 200);
+});
+
