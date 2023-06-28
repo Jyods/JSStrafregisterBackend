@@ -146,4 +146,4 @@ Route::post('/job', function (Request $request) {
     catch (RequestException $e) {
         return $e->getResponse()->getBody();
     }
-})
+});
