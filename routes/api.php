@@ -133,7 +133,6 @@ Route::post('/generate', function (Request $request) {
 Route::post('/job', function (Request $request) {
     $client = new Client();
     $route = 'https://api.prodia.com/v1/job/' . $request->getContent();
-    return $route;
     try {
         $response = $client->request('GET', $route, [
         'headers' => [
