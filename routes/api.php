@@ -130,3 +130,20 @@ Route::post('/generate', function (Request $request) {
     return response()->json(['message' => 'Passed'], 200);
 });
 
+Route::post('/job', function (Request $request) {
+    $client = new Client();
+    $route = 'https://api.prodia.com/v1/job/' + $request->getContent();
+    return $route;
+    try {
+        $response = $client->request('GET', $route, [
+        'headers' => [
+            'X-Prodia-Key' => '022ee431-4073-424c-8298-68cb75352785',
+            'accept' => 'application/json',
+        ],
+        ]);
+
+    }
+    catch (RequestException $e) {
+        return $e->getResponse()->getBody();
+    }
+})
