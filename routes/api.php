@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LawController;
 use App\Http\Controllers\FileLawController;
 use App\Http\Controllers\RankController;
+use App\Http\Controllers\ProdiaLinkController;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -108,42 +109,18 @@ Route::prefix('/discord')->group(function () {
     })->middleware('discord.bot');
 });
 
+Route::prefix('/prodia')->controller(ProdiaLinkController::class)->group(function () {
+    Route::post('/generate', 'generate');
+    Route::post('/job', 'job');
+    Route::get('/job', 'job');
+});
+
 //erstelle eine Route /generate die einfach 200 zurückgibt
 Route::post('/generate', function (Request $request) {
 
-    $client = new Client();
-
-    try {
-        $response = $client->request('POST', 'https://api.prodia.com/v1/job', [
-            'body' => $request->getContent(),
-            'headers' => [
-                'X-Prodia-Key' => '022ee431-4073-424c-8298-68cb75352785',
-                'accept' => 'application/json',
-                'content-type' => 'application/json',
-            ],
-        ]);
-
-        return $response->getBody();
-    } catch (RequestException $e) {
-        return $e->getResponse()->getBody();
-    }
-    return response()->json(['message' => 'Passed'], 200);
+    
 });
 
 Route::post('/job', function (Request $request) {
-    $client = new Client();
-    $route = 'https://api.prodia.com/v1/job/' . $request->getContent();
-    try {
-        $response = $client->request('GET', $route, [
-        'headers' => [
-            'X-Prodia-Key' => '022ee431-4073-424c-8298-68cb75352785',
-            'accept' => 'application/json',
-        ],
-        ]);
-
-    }
-    catch (RequestException $e) {
-        return $e->getResponse()->getBody();
-    }
-    return $response->getBody();
+    
 });
