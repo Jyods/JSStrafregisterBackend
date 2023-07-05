@@ -202,7 +202,8 @@ class DatabaseSeeder extends Seeder
             'identification' => 'CT-6659',
             'restrictionClass' => '10',
             'isActive' => True,
-            'rank_id' => '15'
+            'rank_id' => '15',
+            'discord' => '821117158012354570'
         ]);
 
         User::factory()->create([
@@ -212,7 +213,8 @@ class DatabaseSeeder extends Seeder
             'identification' => 'Jyods',
             'restrictionClass' => '2',
             'isActive' => True,
-            'rank_id' => '1'
+            'rank_id' => '1',
+            'discord' => '345665041477140490'
         ]);
 
         //Entry and Member factory has File factory

@@ -27,6 +27,7 @@ class UserResource extends JsonResource
             //'password' => $this->password,
             'entry' => $this->entry,
             //get the rank name from the rank_id
+            'discord' => $this->discord,
             'rank_id' => $this->rank_id,
             'rank' => new RankResource($this->rank),
         ];

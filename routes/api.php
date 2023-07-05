@@ -107,6 +107,27 @@ Route::prefix('/discord')->group(function () {
         $ranks = \App\Models\Rank::all();
         return response()->json(['message' => $ranks], 200);
     })->middleware('discord.bot');
+
+    #Erstelle eine Route die jeden entry und die anzahl an files die er hat zurückgibt
+    Route::get('/entries', function (Request $request) {
+        $entries = \App\Models\Entry::all();
+        $data = [];
+        foreach ($entries as $entry) {
+            $data[] = [
+                'entry' => $entry,
+                'filesCount' => $entry->files->count(),
+            ];
+        
+        }
+        return response()->json(['message' => $data], 200);
+    })->middleware('discord.bot');
+
+    #Erstelle die Route /discordUser die alle User zurückgibt deren discord nicht null ist
+    Route::get('/discordUser', function (Request $request) {
+        #benutze die UserResource
+        $users = \App\Http\Resources\UserResource::collection(\App\Models\User::whereNotNull('discord')->get());
+        return response()->json(['message' => $users], 200);
+    })->middleware('discord.bot');
 });
 
 Route::prefix('/prodia')->controller(ProdiaLinkController::class)->group(function () {
