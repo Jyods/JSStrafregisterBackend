@@ -135,13 +135,3 @@ Route::prefix('/prodia')->controller(ProdiaLinkController::class)->group(functio
     Route::post('/job', 'job');
     Route::get('/job', 'job');
 });
-
-//erstelle eine Route /generate die einfach 200 zurückgibt
-Route::post('/generate', function (Request $request) {
-
-    
-});
-
-Route::post('/job', function (Request $request) {
-    
-});
