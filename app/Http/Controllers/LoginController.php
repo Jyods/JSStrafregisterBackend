@@ -25,7 +25,7 @@ class LoginController extends Controller
             return response()->json(['token' => $token], 200);
             //return ['token' => $request->user()->createToken('auth_token')->plainTextToken];
         }
-        return response()->json(['message' => 'Login failed'], 401);
+        return response()->json(['message' => 'Wrong username or password'], 401);
     }
     public function checkAuth(Request $request)
     {
