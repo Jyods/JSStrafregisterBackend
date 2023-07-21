@@ -11,6 +11,7 @@ use App\Http\Controllers\LawController;
 use App\Http\Controllers\FileLawController;
 use App\Http\Controllers\RankController;
 use App\Http\Controllers\ProdiaLinkController;
+use App\Http\Controllers\PublishController;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -98,6 +99,24 @@ Route::prefix('/ranks')->controller(RankController::class)->group(function () {
 });
 
 Route::prefix('/discord')->group(function () {
+
+    Route::get('/discord/{discordid}', function (Request $request, $discordid) {
+        $user = \App\Models\User::where('discord', $discordid)->first();
+        return response()->json(['message' => $user], 200);
+    })->middleware('discord.bot');
+
+    Route::get('/files/{entryid}', function (Request $request, $entryid) {
+        #benutze die FileResource
+        $files = \App\Http\Resources\FileResource::collection(\App\Models\File::where('entry_id', $entryid)->get());
+        return response()->json(['message' => $files], 200);
+    })->middleware('discord.bot');
+
+    Route::get('/file/{fileid}', function (Request $request, $fileid) {
+        #benutze die FileResource
+        $file = \App\Http\Resources\FileResource::collection(\App\Models\File::where('id', $fileid)->get());
+        return response()->json(['message' => $file], 200);
+    })->middleware('discord.bot');
+
     Route::get('/test', function (Request $request) {
 
     return response()->json(['message' => 'Passed'], 200);
@@ -134,4 +153,16 @@ Route::prefix('/prodia')->controller(ProdiaLinkController::class)->group(functio
     Route::post('/generate', 'generate');
     Route::post('/job', 'job');
     Route::get('/job', 'job');
+});
+
+Route::prefix('/publish')->controller(PublishController::class)->group(function () {
+    Route::prefix('/case')->group(function () {
+        Route::get('/route/{route}', 'id');
+        Route::get('/id/{id}', 'create')->middleware('auth:sanctum');
+    });
+    Route::post('/create', 'create');
+    Route::get('/{id}', 'id');
+    Route::get('/', 'index');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
 });
