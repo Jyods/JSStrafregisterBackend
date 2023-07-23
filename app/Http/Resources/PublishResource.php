@@ -39,6 +39,7 @@ class PublishResource extends JsonResource
             'laws' => FileLawResource::collection(FileLaw::where('file_id', $this->fileID)->get()),
             'rank' => RankResource::collection(Rank::where('id', $this->rank_id)->get()),
             'publisher' => UserResource::collection(User::where('id', $this->publisher_id)->get()),
+            'route' => $this->route,
         ];
     }
 }

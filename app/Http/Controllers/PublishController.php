@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Resources\PublishResource;
 
+use App\Events\StatusRequest;
+
 class PublishController extends Controller
 {
     /**
@@ -14,7 +16,12 @@ class PublishController extends Controller
      */
     public function index()
     {
-        //
+        //get all publishes with the publish Resource
+        $publishes = PublishResource::collection(Publish::all());
+
+        return response()->json([
+            'message' => $publishes,
+        ], 200);
     }
 
     /**
@@ -50,6 +57,9 @@ class PublishController extends Controller
         $publish->publisher_id = $user->id;
         $publish->save();
 
+
+        //sende eine Broadcast Nachricht an den Channel test-channel
+        broadcast(new StatusRequest('The User: ' . $user->identification . ' created a new public entry.'))->toOthers();
 
         return response()->json([
             'message' => 'You are allowed to publish',

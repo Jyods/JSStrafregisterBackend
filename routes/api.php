@@ -16,6 +16,8 @@ use App\Http\Controllers\PublishController;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
+use App\Events\StatusRequest;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -160,9 +162,12 @@ Route::prefix('/publish')->controller(PublishController::class)->group(function 
         Route::get('/route/{route}', 'id');
         Route::get('/id/{id}', 'create')->middleware('auth:sanctum');
     });
-    Route::post('/create', 'create');
-    Route::get('/{id}', 'id');
     Route::get('/', 'index');
-    Route::put('/{id}', 'update');
-    Route::delete('/{id}', 'destroy');
+});
+
+Route::prefix('/event')->group(function () {
+    Route::get('/test', function (Request $request) {
+        event(new StatusRequest('Hello World!'));
+        return response()->json(['message' => 'Event fired'], 200);
+    });
 });

@@ -10,6 +10,9 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\FileLawResource;
 use App\Models\FileLaw;
 
+use App\Http\Resources\PublishResource;
+use App\Models\Publish;
+
 class FileResource extends JsonResource
 {
     /**
@@ -33,6 +36,7 @@ class FileResource extends JsonResource
             'updated_at' => $this->updated_at,
             'user' => new UserResource($this->user),
             'laws' => FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
+            'publishes' => PublishResource::collection(Publish::where('fileID', $this->id)->get()),
         ];
         /*return [
             'type' => 'Eintrag',
