@@ -73,9 +73,8 @@ class PublishController extends Controller
     public function id(Request $request, string $route)
     {
         //get the publish from the request route with the publish Resource
-        $publish = PublishResource::collection(Publish::where('route', $route)->get());
+        $publish = PublishResource::collection(Publish::where('route', $route)->first());
 
-        $publish = Publish::where('route', $route)->first();
         if ($publish == null) {
             return response()->json([
                 'message' => 'Publish not found',
