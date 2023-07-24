@@ -161,6 +161,7 @@ Route::prefix('/publish')->controller(PublishController::class)->group(function 
     Route::prefix('/case')->group(function () {
         Route::get('/route/{route}', 'id');
         Route::get('/id/{id}', 'create')->middleware('auth:sanctum');
+        Route::delete('/id/{id}', 'destroy')->middleware('auth:sanctum');
     });
     Route::get('/', 'index');
 });

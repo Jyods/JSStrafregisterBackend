@@ -126,8 +126,19 @@ class PublishController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publish $publish)
+    public function destroy(Request $request)
     {
-        //
+        //check if the user is allowed to delete
+        $user = $request->user();
+        if ($user->restrictionClass < 10) {
+            return response()->json([
+                'message' => 'You are not allowed to delete',
+            ], 403);
+        }
+        $publish = Publish::find($request->id);
+        $publish->delete();
+        return response()->json([
+            'message' => 'Publish deleted',
+        ], 200);
     }
 }
