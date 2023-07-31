@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('restrictionClass')->default(0);
             $table->boolean('isActive')->default(true);
             $table->foreignId('rank_id')->constrained()->nullable();
+            $table->json('rank_history')->nullable();
             $table->timestamps();
         });
     }

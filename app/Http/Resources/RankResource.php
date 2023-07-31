@@ -17,6 +17,8 @@ class RankResource extends JsonResource
         return [
             'id' => $this->id,
             'rank' => $this->rank,
+            'unit' => $this->unit,
+            'kader' => $this->kader,
         ];
     }
 }

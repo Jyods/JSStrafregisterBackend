@@ -17,6 +17,9 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 use App\Events\StatusRequest;
+use App\Events\FireMajorMessage;
+use App\Events\FireMinorMessage;
+
 
 
 /*
@@ -169,6 +172,14 @@ Route::prefix('/publish')->controller(PublishController::class)->group(function 
 Route::prefix('/event')->group(function () {
     Route::get('/test', function (Request $request) {
         event(new StatusRequest('Hello World!'));
+        return response()->json(['message' => 'Event fired'], 200);
+    });
+    Route::post('/minor', function (Request $request) {
+        event(new FireMinorMessage($request->message));
+        return response()->json(['message' => 'Event fired'], 200);
+    });
+    Route::post('/major', function (Request $request) {
+        event(new FireMajorMessage($request->message));
         return response()->json(['message' => 'Event fired'], 200);
     });
 });
