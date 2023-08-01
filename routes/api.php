@@ -33,6 +33,38 @@ use App\Events\FireMinorMessage;
 |
 */
 
+/**
+ * @OA\Info(
+ *     title="Meine API",
+ *     version="1.0.0",
+ *     description="Beschreibung meiner API"
+ * )
+ */
+
+
+    /**
+    * Get all users.
+    *
+    * @OA\Get(
+    *     path="/api/users",
+    *     tags={"Users"},
+    *     summary="Get all users",
+    *     description="Returns a list of all users",
+    *     @OA\Response(
+    *         response=200,
+    *         description="Successful operation",
+    *         @OA\JsonContent(
+    *             type="array",
+    *             @OA\Items(ref="#/components/schemas/User")
+    *         ),
+    *     ),
+    *     @OA\Response(
+    *         response=401,
+    *         description="Unauthenticated",
+    *     ),
+    * )
+    */
+    
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     $user = $request->user();
     $data = [
@@ -44,6 +76,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::prefix('/files')->controller(FileController::class)->group(function () {
+     /**
+     * @OA\Info(
+     *     title="Meine API",
+     *     version="1.0.0",
+     *     description="Beschreibung meiner API"
+     * )
+     */
     Route::get('/', 'index');
     Route::get('/id/{id}', 'getid')->middleware('auth:sanctum');
     Route::post('/create', 'store')->middleware('auth:sanctum');
