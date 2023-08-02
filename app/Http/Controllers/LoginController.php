@@ -13,6 +13,39 @@ use Illuminate\Support\Facades\Mail;
 
 class LoginController extends Controller
 {
+    /**
+     * Get the just the entries.
+     *
+     * @OA\POST(
+     *     path="/login",
+     *    tags={"login"},
+     *    operationId="login",
+     *   @OA\Response(
+     *      response=200,
+     *    description="successful operation",
+     * ),
+     *  @OA\Response(
+     *     response=401,
+     *   description="Wrong username or password",
+     * ),
+     * @OA\Parameter(
+     *    name="identification",
+     *   required=true,
+     * in="query",
+     *  @OA\Schema(
+     *    type="string"
+     * ),
+     * ),
+     * @OA\Parameter(
+     *   name="password",
+     * required=true,
+     * in="query",
+     * @OA\Schema(
+     *  type="string"
+     * ),
+     * ),
+     * )
+     */
     public function login(Request $request)
     {
         if (Auth::attempt($request->only(['identification', 'password']))) {
@@ -27,6 +60,30 @@ class LoginController extends Controller
         }
         return response()->json(['message' => 'Wrong username or password'], 401);
     }
+    /**
+     * Get the just the entries.
+     *
+     * @OA\GET(
+     *     path="/auth",
+     *   tags={"login"},
+     *  operationId="checkAuth",
+     * @OA\Response(
+     *   response=200,
+     * description="successful operation",
+     * ),
+     * @OA\Response(
+     *   response=401,
+     * description="Please login",
+     * ),
+     * security={{"barear":{}}},
+     * )
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Auth\Access\AuthorizationException
+     * @throws \Illuminate\Validation\ValidationException
+     * @throws \Illuminate\Auth\AuthenticationException
+     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException
+     */
     public function checkAuth(Request $request)
     {
         if($request->user() == null) {

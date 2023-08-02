@@ -9,9 +9,40 @@ use App\Models\File;
 
 use App\Mail\UpdateEmail;
 use Illuminate\Support\Facades\Mail;
-
+/**
+ * @OA\Info(
+ *      version="1.0.0",
+ *      x={
+ *          "logo": {
+ *              "url": "https://via.placeholder.com/190x90.png?text=L5-Swagger"
+ *          }
+ *      },
+ *      title="L5 OpenApi",
+ *      description="L5 Swagger OpenApi description",
+ *      @OA\Contact(
+ *          email="darius@matulionis.lt"
+ *      ),
+ *     @OA\License(
+ *         name="Apache 2.0",
+ *         url="https://www.apache.org/licenses/LICENSE-2.0.html"
+ *     )
+ * )
+ */
 class UserController extends Controller
 {
+    /**
+     * Add a new pet to the store.
+     *
+     * @OA\Post(
+     *     path="/pet",
+     *     tags={"pet"},
+     *     operationId="addPet",
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input"
+     *     )
+     * )
+     */
     public function index()
     {
         $user = User::all();

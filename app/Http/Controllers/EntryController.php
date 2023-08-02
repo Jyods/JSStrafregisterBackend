@@ -9,6 +9,24 @@ use App\Http\Resources\OnlyEntryResource;
 
 class EntryController extends Controller
 {
+    /**
+     * Get all entries.
+     *
+     * @OA\GET(
+     *     path="/entries/index",
+     *     tags={"entry"},
+     *     operationId="getEntries",
+     *     security={{"barear":{}}},
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input",
+     *    ),
+     *    @OA\Response(
+     *       response=200,
+     *     description="successful operation",
+     * ),
+     * )
+     */
     public function index(Request $request)
     {
         /*get the user from the request
@@ -22,11 +40,69 @@ class EntryController extends Controller
         return EntryResource::collection(Entry::all());
     }
 
+    /**
+     * Get the Entry from ID.
+     *
+     * @OA\GET(
+     *     path="/entries/index/{id}",
+     *     tags={"entry"},
+     *     operationId="getEntryById",
+     *     security={{"barear":{}}},
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input",
+     *    ),
+     *    @OA\Response(
+     *       response=200,
+     *     description="successful operation",
+     * ),
+     *    @OA\Parameter(
+     *        name="id",
+     *       in="path",
+     *      description="The id of the entry",
+     *    required=true,
+     *   @OA\Schema(
+     *     type="integer",
+     *    format="int64"
+     *  )
+     *  )
+     * )
+     */
     public function id(int $id)
     {
         $entry = Entry::find($id);
         return new EntryResource(Entry::find($id));
     }
+    /**
+     * Store a new entry.
+     *
+     * @OA\Post(
+     *     path="/entries/create",
+     *     tags={"entry"},
+     *     operationId="storeEntry",
+     *     security={{"bearer":{}}},
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input",
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *     ),
+     *     @OA\Response(
+     *         response=422,
+     *         description="Unprocessable Entity",
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         description="The entry data",
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="identification", type="string", example="EntryID123")
+     *         )
+     *     )
+     * )
+     */
     public function store(Request $request)
     {
         $entry = new Entry();
@@ -34,6 +110,24 @@ class EntryController extends Controller
         $entry->save();
         return new EntryResource($entry);
     }
+    /**
+     * Get the just the entries.
+     *
+     * @OA\GET(
+     *     path="/entries/onlyEntry",
+     *     tags={"entry"},
+     *     operationId="getOnlyEntry",
+     *     security={{"barear":{}}},
+     *     @OA\Response(
+     *         response=405,
+     *         description="Invalid input",
+     *    ),
+     *    @OA\Response(
+     *       response=200,
+     *     description="successful operation",
+     * ),
+     * )
+     */
     public function onlyEntry() {
         return OnlyEntryResource::collection(Entry::all());
     }

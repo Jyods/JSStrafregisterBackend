@@ -1,0 +1,228 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "L5 OpenApi",
+        "description": "L5 Swagger OpenApi description",
+        "contact": {
+            "email": "darius@matulionis.lt"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0",
+        "x-logo": {
+            "url": "https://via.placeholder.com/190x90.png?text=L5-Swagger"
+        }
+    },
+    "servers": [
+        {
+            "url": "/api/"
+        }
+    ],
+    "paths": {
+        "/entries/index": {
+            "get": {
+                "tags": [
+                    "entry"
+                ],
+                "summary": "Get all entries.",
+                "operationId": "getEntries",
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "barear": []
+                    }
+                ]
+            }
+        },
+        "/entries/index/{id}": {
+            "get": {
+                "tags": [
+                    "entry"
+                ],
+                "summary": "Get the Entry from ID.",
+                "operationId": "getEntryById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "The id of the entry",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "barear": []
+                    }
+                ]
+            }
+        },
+        "/entries/create": {
+            "post": {
+                "tags": [
+                    "entry"
+                ],
+                "summary": "Store a new entry.",
+                "operationId": "storeEntry",
+                "requestBody": {
+                    "description": "The entry data",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "identification": {
+                                        "type": "string",
+                                        "example": "EntryID123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                },
+                "security": [
+                    {
+                        "bearer": []
+                    }
+                ]
+            }
+        },
+        "/entries/onlyEntry": {
+            "get": {
+                "tags": [
+                    "entry"
+                ],
+                "summary": "Get the just the entries.",
+                "operationId": "getOnlyEntry",
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    },
+                    "200": {
+                        "description": "successful operation"
+                    }
+                },
+                "security": [
+                    {
+                        "barear": []
+                    }
+                ]
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": [
+                    "login"
+                ],
+                "summary": "Get the just the entries.",
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "name": "identification",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Wrong username or password"
+                    }
+                }
+            }
+        },
+        "/auth": {
+            "get": {
+                "tags": [
+                    "login"
+                ],
+                "summary": "Get the just the entries.",
+                "operationId": "checkAuth",
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "401": {
+                        "description": "Please login"
+                    }
+                },
+                "security": [
+                    {
+                        "barear": []
+                    }
+                ]
+            }
+        },
+        "/pet": {
+            "post": {
+                "tags": [
+                    "pet"
+                ],
+                "summary": "Add a new pet to the store.",
+                "operationId": "addPet",
+                "responses": {
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "barear": {
+                "type": "http",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "in": "header"
+            }
+        }
+    }
+}

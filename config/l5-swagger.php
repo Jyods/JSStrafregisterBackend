@@ -87,7 +87,7 @@ return [
             /*
              * Edit to set the api's base path
             */
-            'base' => env('L5_SWAGGER_BASE_PATH', null),
+            'base' => env('L5_SWAGGER_BASE_PATH', '/api/'),
 
             /*
              * Edit to set path where swagger ui assets should be stored
@@ -191,13 +191,22 @@ return [
                         ],
                     ],
                 ],
-                'sanctum' => [ // Unique name of security
-                    'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
+                
+                    'sanctum' => [ // Unique name of security
+                        'type' => 'apiKey', // Valid values are "basic", "apiKey" or "oauth2".
+                        'description' => 'Enter token in format (Bearer <token>)',
+                        'name' => 'Authorization', // The name of the header or query parameter to be used.
+                        'in' => 'header', // The location of the API key. Valid values are "query" or "header".
+                    ],
+                    */
+                'barear' => [
+                    'type' => 'http',
                     'description' => 'Enter token in format (Bearer <token>)',
-                    'name' => 'Authorization', // The name of the header or query parameter to be used.
-                    'in' => 'header', // The location of the API key. Valid values are "query" or "header".
-                ],
-                */
+                    'name' => 'Authorization',
+                    'scheme' => 'bearer',
+                    'bearerFormat' => 'JWT',
+                    'in' => 'header'
+                ]
             ],
             'security' => [
                 /*
