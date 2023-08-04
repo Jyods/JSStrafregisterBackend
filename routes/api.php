@@ -12,6 +12,10 @@ use App\Http\Controllers\FileLawController;
 use App\Http\Controllers\RankController;
 use App\Http\Controllers\ProdiaLinkController;
 use App\Http\Controllers\PublishController;
+use App\Http\Controllers\OfficialDocumentController;
+use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\OfficialDocumentPublishController;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -167,6 +171,14 @@ Route::prefix('/publish')->controller(PublishController::class)->group(function 
         Route::delete('/id/{id}', 'destroy')->middleware('auth:sanctum');
     });
     Route::get('/', 'index');
+});
+
+Route::prefix('/odt')->controller(OfficialDocumentController::class)->group(function () {
+    Route::get('/', 'index')->middleware('auth:sanctum');
+    Route::get('/{id}', 'id');
+    Route::post('/', 'store');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
 });
 
 Route::prefix('/event')->group(function () {

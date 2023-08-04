@@ -11,6 +11,8 @@ use App\Models\User;
 use App\Models\Law;
 use App\Models\FileLaw;
 use App\Models\Rank;
+use App\Models\Institution;
+use App\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -185,6 +187,34 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
+        $institutions = [
+            (object) [
+                'name' => 'Repulikanischer Senat',
+                'description' => 'Der Republikanische Senat ist die Legislative der Galaktischen Republik. Er ist der Nachfolger des Galaktischen Senats der Alten Republik.',
+                'abbreviation' => 'RS',
+            ],
+            (object) [
+                'name' => 'Jedi Orden',
+                'description' => 'Der Jedi-Orden ist eine religiöse Organisation, die sich der Macht verschrieben hat. Die Jedi sind die Hüter des Friedens und der Gerechtigkeit in der Galaxis.',
+                'abbreviation' => 'JO',
+            ],
+            (object) [
+                'name' => 'Republikanisches Zentrum für innere Sicherheit',
+                'description' => 'Das Republikanische Zentrum für innere Sicherheit ist eine Organisation, die sich mit der inneren Sicherheit der Republik befasst.',
+                'abbreviation' => 'RZIS',
+            ],
+            (object) [
+                'name' => 'Republikanisches Zentrum für Inneres und Integrität',
+                'description' => 'Das Republikanische Zentrum für Inneres und Integrität ist eine Organisation, die sich mit der inneren Sicherheit der Republik befasst.',
+                'abbreviation' => 'RZII',
+            ],
+            (object) [
+                'name' => 'Republikanisches Zentrum für Äußere Angelegenheiten',
+                'description' => 'Das Republikanische Zentrum für Äußere Angelegenheiten ist eine Organisation, die sich mit der inneren Sicherheit der Republik befasst.',
+                'abbreviation' => 'RZfA',
+            ]
+            ];
+
         //Create as much ranks as there are in the array
         foreach ($ranks as $rank) {
             Rank::factory()->create([
@@ -231,7 +261,15 @@ class DatabaseSeeder extends Seeder
         ->count(100)
         ->create();
 
-        
+        foreach($institutions as $institution) {
+            Institution::factory()->create([
+                'name' => $institution->name,
+                'description' => $institution->description,
+                'abbreviation' => $institution->abbreviation,
+            ]);
+        }
+
+        Permission::factory(10)->create();
 
 
         /*Member::factory()
