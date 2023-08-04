@@ -70,7 +70,12 @@ class LoginController extends Controller
         //get rank_id from rank object
         $user->rank_id = $request->rank_id;
         $user->save();
-        Mail::to($request->email)->send(new WelcomeEmail($request->identification, $request->password, $request->creator_name));
+        //versuche email zu senden, wenn es nicht geht, dann ist es nicht schlimm
+        try {
+            Mail::to($request->email)->send(new WelcomeEmail($request->identification, $request->password, $request->creator_name));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return new UserResource($user);
     }
     public function logout(Request $request) {

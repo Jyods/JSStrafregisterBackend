@@ -48,7 +48,11 @@ class UserController extends Controller
         $user->restrictionClass = $request->restrictionClass ?? $user->restrictionClass;
         $user->rank_id = $request->rank_id ?? $user->rank_id;
         $user->save();
-        Mail::to($user->email)->send(new UpdateEmail($old_values, $user, $request->user()->identification));
+        try {
+            Mail::to($user->email)->send(new UpdateEmail($old_values, $user, $request->user()->identification));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return new UserResource($user);
     }
 }
