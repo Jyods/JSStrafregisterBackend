@@ -176,7 +176,7 @@ Route::prefix('/publish')->controller(PublishController::class)->group(function 
 Route::prefix('/odt')->controller(OfficialDocumentController::class)->group(function () {
     Route::get('/', 'index')->middleware('auth:sanctum');
     Route::get('/{id}', 'id');
-    Route::post('/', 'store');
+    Route::post('/', 'store')->middleware('auth:sanctum');
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'destroy');
 });

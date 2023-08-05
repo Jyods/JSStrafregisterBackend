@@ -9,6 +9,8 @@ use App\Models\OfficialDocument;
 
 use App\Http\Resources\ODTStatusResource;
 
+use App\Models\User;
+
 
 class OfficialDocumentController extends Controller
 {
@@ -29,6 +31,7 @@ class OfficialDocumentController extends Controller
 
     function store(Request $request)
     {
+
         // * JUST EDIT THIS PART * \\
         $current_delay_hours = 22;
       // *************************** \\
@@ -44,6 +47,8 @@ class OfficialDocumentController extends Controller
         $trippled__delayed_time = date("Y-m-d H:i:s", strtotime($current_time) + ($current_delay_hours * 2.5) + $delay_timezone);
         // es wird * 
         
+        $user = $request->user();
+        $user_id = $user->id;
 
         $officialDocument = new OfficialDocument();
         $officialDocument->name = $request->name;
@@ -59,7 +64,7 @@ class OfficialDocumentController extends Controller
         {
             $officialDocument->official_document_id = $request->official_document_id;
         }
-        $officialDocument->user_id = $request->user_id;
+        $officialDocument->user_id = $request->user_id != null ? $request->user_id : $user_id;
         $officialDocument->save();
         return $officialDocument;
     }

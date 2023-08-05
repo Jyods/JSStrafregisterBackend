@@ -42,6 +42,9 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
+
+        //mache aus der spalte file einen longblob
+        DB::statement("ALTER TABLE official_documents MODIFY file MEDIUMBLOB");
     }
 
     /**
