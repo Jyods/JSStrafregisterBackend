@@ -233,7 +233,8 @@ class DatabaseSeeder extends Seeder
             'restrictionClass' => '10',
             'isActive' => True,
             'rank_id' => '15',
-            'discord' => '821117158012354570'
+            'discord' => '821117158012354570',
+            'permission_superadmin' => True,
         ]);
 
         User::factory()->create([

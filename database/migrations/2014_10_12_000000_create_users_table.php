@@ -27,6 +27,12 @@ return new class extends Migration
             $table->boolean('isActive')->default(true);
             $table->foreignId('rank_id')->constrained()->nullable();
             $table->json('rank_history')->nullable();
+            $table->boolean('permission_register')->default(true);
+            $table->boolean('permission_creator')->default(true);
+            $table->boolean('permission_recruiter')->default(false);
+            $table->boolean('permission_broadcaster')->default(false);
+            $table->boolean('permission_admin')->default(false);
+            $table->boolean('permission_superadmin')->default(false);
             $table->timestamps();
         });
     }

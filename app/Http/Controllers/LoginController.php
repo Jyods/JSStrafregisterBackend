@@ -51,7 +51,17 @@ class LoginController extends Controller
     public function getRestrictionClass(Request $request)
     {
         $user = $request->user();
-        $permissions = $user->restrictionClass;
+        $permissions = [
+            'restrictionClass' => $user->restrictionClass,
+            'permissions' => [
+                'permission_register' => $user->permission_register,
+                'permission_creator' => $user->permission_creator,
+                'permission_recruiter' => $user->permission_recruiter,
+                'permission_brodcaster' => $user->permission_broadcaster,
+                'permission_admin' => $user->permission_admin,
+                'permission_superadmin' => $user->permission_superadmin,
+            ]
+        ];
         return response()->json(['data' => $permissions], 200);
     }
     public static function getUser() {
