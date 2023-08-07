@@ -16,6 +16,8 @@ use App\Http\Controllers\OfficialDocumentController;
 use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\OfficialDocumentPublishController;
+use App\Http\Controllers\OfficialDocumentArchiveController;
+use App\Http\Controllers\AllChatController;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -23,6 +25,7 @@ use GuzzleHttp\Exception\RequestException;
 use App\Events\StatusRequest;
 use App\Events\FireMajorMessage;
 use App\Events\FireMinorMessage;
+use App\Events\FireAllchatMessage;
 
 
 
@@ -181,6 +184,14 @@ Route::prefix('/odt')->controller(OfficialDocumentController::class)->group(func
     Route::delete('/{id}', 'destroy');
 });
 
+Route::prefix('/odtarchive')->controller(OfficialDocumentArchiveController::class)->group(function () {
+    Route::get('/', 'index')->middleware('auth:sanctum');
+    Route::get('/{id}', 'id');
+    Route::post('/', 'store')->middleware('auth:sanctum');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
+});
+
 Route::prefix('/event')->group(function () {
     Route::get('/test', function (Request $request) {
         event(new StatusRequest('Hello World!'));
@@ -194,4 +205,20 @@ Route::prefix('/event')->group(function () {
         event(new FireMajorMessage($request->message));
         return response()->json(['message' => 'Event fired'], 200);
     });
+});
+
+Route::prefix('/institution')->controller(InstitutionController::class)->group(function () {
+    Route::get('/', 'index');
+    Route::get('/{id}', 'id');
+    Route::post('/', 'store');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
+});
+
+Route::prefix('/allchat')->controller(AllChatController::class)->group(function () {
+    Route::get('/', 'index')->middleware('auth:sanctum');
+    Route::get('/{from}', 'range')->middleware('auth:sanctum');
+    Route::post('/', 'store')->middleware('auth:sanctum');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
 });
