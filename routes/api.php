@@ -194,6 +194,7 @@ Route::prefix('/odtarchive')->controller(OfficialDocumentArchiveController::clas
 
 Route::prefix('/event')->group(function () {
     Route::get('/test', function (Request $request) {
+        #Bananen sind schön
         event(new StatusRequest('Hello World!'));
         return response()->json(['message' => 'Event fired'], 200);
     });
