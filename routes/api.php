@@ -17,7 +17,7 @@ use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\OfficialDocumentPublishController;
 use App\Http\Controllers\OfficialDocumentArchiveController;
-use App\Http\Controllers\AllChatController;
+use App\Http\Controllers\AllchatController;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -216,7 +216,7 @@ Route::prefix('/institution')->controller(InstitutionController::class)->group(f
     Route::delete('/{id}', 'destroy');
 });
 
-Route::prefix('/allchat')->controller(AllChatController::class)->group(function () {
+Route::prefix('/allchat')->controller(AllchatController::class)->group(function () {
     Route::get('/', 'index')->middleware('auth:sanctum');
     Route::get('/{from}', 'range')->middleware('auth:sanctum');
     Route::post('/', 'store')->middleware('auth:sanctum');
