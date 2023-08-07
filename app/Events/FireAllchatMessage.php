@@ -11,18 +11,18 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class FireMinorMessage implements ShouldBroadcastNow
+class FireAllchatMessage implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $message;
+    public $data;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($message)
+    public function __construct(object $object)
     {
-        $this->message = $message;
+        $this->data = $object;
     }
 
     /**
@@ -34,9 +34,8 @@ class FireMinorMessage implements ShouldBroadcastNow
     {
         return ['message-channel'];
     }
-
     public function broadcastAs()
     {
-        return 'minor-event';
+        return 'allchat-event';
     }
 }

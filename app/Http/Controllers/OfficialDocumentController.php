@@ -18,7 +18,9 @@ class OfficialDocumentController extends Controller
     {
         //get the user from the request
         $user = $request->user();
-        //returne alle OfficialDocuments die der User erstellt hat mit der OTDStatusResource
+        //returne alle OfficialDocuments die der User erstellt hat mit der OTDStatusResource und welche die nicht archiviert sind
+        return ODTStatusResource::collection(OfficialDocument::where('user_id', $user->id)->where('isarchived', false)->get());
+
         return ODTStatusResource::collection(OfficialDocument::where('user_id', $user->id)->get());
 
         return OfficialDocument::where('user_id', $user->id)->get();
