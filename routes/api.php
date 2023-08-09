@@ -17,6 +17,7 @@ use App\Http\Controllers\InstitutionController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\OfficialDocumentPublishController;
 use App\Http\Controllers\OfficialDocumentArchiveController;
+use App\Http\Controllers\OfficialDocumentReplyController;
 use App\Http\Controllers\AllchatController;
 
 use GuzzleHttp\Client;
@@ -177,6 +178,14 @@ Route::prefix('/publish')->controller(PublishController::class)->group(function 
 });
 
 Route::prefix('/odt')->controller(OfficialDocumentController::class)->group(function () {
+    Route::get('/', 'index')->middleware('auth:sanctum');
+    Route::get('/{id}', 'id');
+    Route::post('/', 'store')->middleware('auth:sanctum');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
+});
+
+Route::prefix('/odtreply')->controller(OfficialDocumentReplyController::class)->group(function () {
     Route::get('/', 'index')->middleware('auth:sanctum');
     Route::get('/{id}', 'id');
     Route::post('/', 'store')->middleware('auth:sanctum');

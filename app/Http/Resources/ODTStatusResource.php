@@ -51,6 +51,7 @@ class ODTStatusResource extends JsonResource
             'institution' => Institution::find($this->institution_id),
             'isdeleted' => $this->isdeleted,
             'isarchived' => $this->isarchived,
+            'isanswer' => $this->isanswer,
             'wasredirected' => $this->wasredirected,
             'shouldReply' => $this->shouldreply,
             'status' => [

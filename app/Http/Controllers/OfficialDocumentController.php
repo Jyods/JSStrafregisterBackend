@@ -62,10 +62,7 @@ class OfficialDocumentController extends Controller
         $officialDocument->processstatus = $doubled_delayed_time;
         $officialDocument->sendupstatus = $trippled__delayed_time;
         $officialDocument->isanswer = $request->isanswer;
-        if($request->isanswer == true)
-        {
-            $officialDocument->official_document_id = $request->official_document_id;
-        }
+        $officialDocument->official_document_id = $request->official_document_id;
         $officialDocument->user_id = $request->user_id != null ? $request->user_id : $user_id;
         $officialDocument->save();
         return $officialDocument;
