@@ -18,13 +18,9 @@ class EntryController extends Controller
      *     operationId="getEntries",
      *     security={{"barear":{}}},
      *     @OA\Response(
-     *         response=405,
-     *         description="Invalid input",
-     *    ),
-     *    @OA\Response(
-     *       response=200,
-     *     description="successful operation",
-     * ),
+     *         response=200,
+     *         description="Successful operation",
+     *     )
      * )
      */
     public function index(Request $request)
@@ -49,23 +45,19 @@ class EntryController extends Controller
      *     operationId="getEntryById",
      *     security={{"barear":{}}},
      *     @OA\Response(
-     *         response=405,
-     *         description="Invalid input",
-     *    ),
-     *    @OA\Response(
-     *       response=200,
-     *     description="successful operation",
-     * ),
-     *    @OA\Parameter(
-     *        name="id",
-     *       in="path",
-     *      description="The id of the entry",
-     *    required=true,
-     *   @OA\Schema(
-     *     type="integer",
-     *    format="int64"
-     *  )
-     *  )
+     *         response=200,
+     *         description="Successful operation",
+     *     ),
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         description="The id of the entry",
+     *         required=true,
+     *         @OA\Schema(
+     *             type="integer",
+     *             format="int64"
+     *         )
+     *     )
      * )
      */
     public function id(int $id)
