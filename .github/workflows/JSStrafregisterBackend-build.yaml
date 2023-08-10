@@ -70,6 +70,10 @@ jobs:
           npm ci
           npm run build
 
+      - name: Create Swagger JSON
+        run: |
+          php artisan l5-swagger:generate
+
 # Please do not touch the following action
       - name: Store deployment content
         uses: ionos-deploy-now/artifact-action@v1
