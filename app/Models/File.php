@@ -22,4 +22,8 @@ class File extends Model
     {
         return $this->hasMany(FileLaw::class);
     }
+    public function rank()
+    {
+        return $this->belongsTo(Rank::class);
+    }
 }

@@ -21,7 +21,6 @@ class EntryFactory extends Factory
         $name = "CT-". $randomNumber;
         return [
             'identification' => $name,
-            'age' => $this->faker->randomNumber(1,100),
         ];
     }
 }

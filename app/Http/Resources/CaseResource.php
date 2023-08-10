@@ -10,6 +10,13 @@ use App\Http\Controllers\LoginController;
 use App\Http\Resources\LawResource;
 use App\Http\Resources\FileLawResource;
 use App\Models\FileLaw;
+use App\Models\Rank;
+
+use App\Http\Resources\UserResource;
+use App\Models\User;
+
+use App\Http\Resources\PublishResource;
+use App\Models\Publish;
 
 class CaseResource extends JsonResource
 {
@@ -23,21 +30,27 @@ class CaseResource extends JsonResource
         $str = $this->description;
         $str = preg_replace("/[a-zA-Z]/", "█", $str);
         $class = LoginController::getUser();
+        
+        $publishes = $class >= 10 ? PublishResource::collection(Publish::where('fileID', $this->id)->get()) : 'Restricted';
+
         if ($this->restrictionClass <= $class) {
+            $formatted_date = date('d.m.Y', strtotime($this->date));
+
             return [
                 'type' => 'Eintrag',
                 'id' => $this->id,
                 'definition' => $this->definition,
                 'description' => $this->description,
-                'date' => $this->date,
+                'date' => $formatted_date,
                 'fine' => $this->fine,
-                'article' => $this->article,
                 'isRestricted' => $this->isRestricted,
                 'restrictionClass' => $this->restrictionClass,
                 'created_at' => $this->created_at,
                 'updated_at' => $this->updated_at,
                 'user' => new UserResource($this->user),
                 'laws' => FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
+                'rank' => RankResource::collection(Rank::where('id', $this->rank_id)->get()),
+                'publishes' => $publishes,
             ];
         } else {
             return [
@@ -47,13 +60,14 @@ class CaseResource extends JsonResource
                 'description' => preg_replace("/[a-zA-Z]/", "█", $this->description),
                 'date' => 'Restricted',
                 'fine' => 'Restricted',
-                'article' => 'Restricted',
                 'isRestricted' => true,
                 'restrictionClass' => $this->restrictionClass,
                 'created_at' => 'Restricted',
                 'updated_at' => 'Restricted',
                 'user' => 'Restricted',
                 'laws' => 'Restricted',
+                'rank' => 'Restricted',
+                'publishes' => $publishes,
             ];
         }
         return [
@@ -62,13 +76,14 @@ class CaseResource extends JsonResource
             'description' => $this->isRestricted ? $str : $this->description,
             'date' => $this->isRestricted ? 'Restricted' : $this->date,
             'fine' => $this->isRestricted ? 'Restricted' : $this->fine,
-            'article' => $this->isRestricted ? 'Restricted' : $this->article,
             'isRestricted' => $this->isRestricted,
             'restrictionClass' => $this->restrictionClass,
             'created_at' => $this->isRestricted ? 'Restricted' : $this->created_at,
             'updated_at' => $this->isRestricted ? 'Restricted' : $this->updated_at,
             'user' => $this->isRestricted ? 'Restricted' : new UserResource($this->user),
             'laws' => $this->isRestricted ? 'Restricted' : FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
+            'rank' => $this->isRestricted ? 'Restricted' : RankResource::collection(Rank::where('id', $this->rank_id)->get()),
+            'publishes' => 'There was an error'
         ];
     }
 }

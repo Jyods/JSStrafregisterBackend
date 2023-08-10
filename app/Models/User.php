@@ -51,4 +51,8 @@ class User extends Authenticatable
     {
         return $this->restriction_class;
     }
+    public function rank()
+    {
+        return $this->belongsTo(Rank::class);
+    }
 }

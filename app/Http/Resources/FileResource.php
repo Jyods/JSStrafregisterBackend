@@ -10,6 +10,9 @@ use App\Http\Resources\UserResource;
 use App\Http\Resources\FileLawResource;
 use App\Models\FileLaw;
 
+use App\Http\Resources\PublishResource;
+use App\Models\Publish;
+
 class FileResource extends JsonResource
 {
     /**
@@ -19,14 +22,25 @@ class FileResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        //konvertiere das datum zu dd.mm.yyyy
+        $formatted_date = date('d.m.Y', strtotime($this->date));
+
+        $formatted_desc = substr($this->description, 0, 20) . '...';
+
+        /* $checkifdescisutf8 = mb_detect_encoding($this->description, 'UTF-8', true);
+
+        $encoded_desc_from_utf8 = utf8_encode($this->description);
+
+        return ["desc" => $encoded_desc_from_utf8]; */
+
         return [
             'type' => 'Eintrag',
             'id' => $this->id,
             'definition' => $this->definition,
-            'description' => substr($this->description, 0, 40) . '...',
-            'date' => $this->date,
+            //'description' => $this->description,
+            'description' => $formatted_desc,
+            'date' => $formatted_date,
             'fine' => $this->fine,
-            'article' => $this->article,
             'isRestricted' => false,
             'isRestricted_Normal' => $this->isRestricted,
             'restrictionClass' => $this->restrictionClass,
@@ -34,6 +48,7 @@ class FileResource extends JsonResource
             'updated_at' => $this->updated_at,
             'user' => new UserResource($this->user),
             'laws' => FileLawResource::collection(FileLaw::where('file_id', $this->id)->get()),
+            'publishes' => PublishResource::collection(Publish::where('fileID', $this->id)->get()),
         ];
         /*return [
             'type' => 'Eintrag',

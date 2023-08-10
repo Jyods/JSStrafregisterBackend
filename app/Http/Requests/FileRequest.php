@@ -25,7 +25,6 @@ class FileRequest extends FormRequest
             'definition' => 'required|string',
             'date' => 'required|date',
             'fine' => 'required|numeric',
-            'article' => 'required|string',
             'isRestricted' => 'required|boolean',
             'restrictionClass' => 'required|string',
             'entry_id' => 'required|integer',

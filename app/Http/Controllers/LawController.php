@@ -11,7 +11,9 @@ class LawController extends Controller
 {
     public function index()
     {
-        return LawResource::collection(Law::all());
+        //return LawResource::collection(Law::all());
+        //return all laws and sort first by Severity, then by paragraph(int)
+        return LawResource::collection(Law::all()->sortBy('Paragraph')->sortBy('Severity'));
     }
     public function id(int $id)
     {

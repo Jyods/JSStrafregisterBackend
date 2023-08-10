@@ -16,15 +16,23 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->biginteger('discord')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->string('identification');
-            $table->integer('age');
             $table->date('entry')->default(now());
             $table->date('departure')->nullable();
             $table->string('reason')->nullable();
             $table->integer('restrictionClass')->default(0);
             $table->boolean('isActive')->default(true);
+            $table->foreignId('rank_id')->constrained()->nullable();
+            $table->json('rank_history')->nullable();
+            $table->boolean('permission_register')->default(true);
+            $table->boolean('permission_creator')->default(true);
+            $table->boolean('permission_recruiter')->default(false);
+            $table->boolean('permission_broadcaster')->default(false);
+            $table->boolean('permission_admin')->default(false);
+            $table->boolean('permission_superadmin')->default(false);
             $table->timestamps();
         });
     }

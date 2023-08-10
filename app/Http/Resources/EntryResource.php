@@ -9,6 +9,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\FileResource;
 use App\Http\Controllers\LoginController;
 
+use App\Http\Resources\PublishResource;
+use App\Models\Publish;
+
 class EntryResource extends JsonResource
 {
     /**
@@ -35,12 +38,12 @@ class EntryResource extends JsonResource
                         'description' => 'Restricted',
                         'date' => 'Restricted',
                         'fine' => 'Restricted',
-                        'article' => 'Restricted',
                         'isRestricted' => true,
                         'restrictionClass' => $file->restrictionClass,
                         'created_at' => 'Restricted',
                         'updated_at' => 'Restricted',
                         'user' => 'Restricted',
+                        'publishes' => PublishResource::collection(Publish::where('fileID', $file->id)->get()),
                     ];
                 }
             }),

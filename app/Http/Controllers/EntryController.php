@@ -31,7 +31,6 @@ class EntryController extends Controller
     {
         $entry = new Entry();
         $entry->identification = $request->identification;
-        $entry->age = $request->age;
         $entry->save();
         return new EntryResource($entry);
     }

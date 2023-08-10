@@ -5,6 +5,8 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Http\Resources\RankResource;
+
 class UserResource extends JsonResource
 {
     /**
@@ -18,13 +20,16 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'type' => 'Beamter',
             'identification' => $this->identification,
-            'age' => $this->age,
             'isActive' => $this->isActive,
             'restrictionClass' => $this->restrictionClass,
             'email' => $this->email,
             'name' => $this->name,
-            'password' => $this->password,
+            //'password' => $this->password,
             'entry' => $this->entry,
+            //get the rank name from the rank_id
+            'discord' => $this->discord,
+            'rank_id' => $this->rank_id,
+            'rank' => new RankResource($this->rank),
         ];
     }
 }

@@ -26,12 +26,12 @@ class FileController extends Controller
         $file->definition = $request->definition;
         $file->date = $request->date;
         $file->fine = $request->fine;
-        $file->article = $request->article;
         $file->isRestricted = $request->isRestricted;
         $file->description = $request->description;
         $file->restrictionClass = $request->restrictionClass;
         $file->user_id = $user->id;
         $file->entry_id = $request->entry_id;
+        $file->rank_id = $request->rank_id;
         $file->save();
         return $file;
     }
@@ -41,7 +41,6 @@ class FileController extends Controller
         $file->definition = 'Testdefinition';
         $file->date = '2021-01-01';
         $file->fine = 100;
-        $file->article = 'Testartikel';
         $file->isRestricted = false;
         $file->restrictionClass = 1;
         $file->user_id = 1;

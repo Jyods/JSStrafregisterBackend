@@ -19,8 +19,8 @@ class LawFactory extends Factory
         return [
             'Paragraph' => $this->faker->randomNumber(2,100),
             'Title' => $this->faker->realTextBetween(5, 10),
-            'Category' => $this->faker->randomElement(['Criminal', 'Civil', 'Administrative', 'Constitutional', 'Labor', 'Commercial', 'International', 'Tax', 'Military', 'Environmental', 'Intellectual', 'Family', 'Human Rights', 'Health', 'Sports', 'Other']),
-            'Severity' => $this->faker->randomElement(['Minor', 'Serious', 'Very Serious']),
+            'Category' => $this->faker->randomElement(['STgB']),
+            'Severity' => $this->faker->randomElement(['Category 1', 'Category 2', 'Category 3', 'Special']),
             'ShortDescription' => $this->faker->realTextBetween(5, 10),
             'Description' => $this->faker->realTextBetween(50, 100),
             'minJail' => $this->faker->randomNumber(1, 10),
