@@ -22,12 +22,24 @@ class FileResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        //konvertiere das datum zu dd.mm.yyyy
+        $formatted_date = date('d.m.Y', strtotime($this->date));
+
+        $formatted_desc = substr($this->description, 0, 20) . '...';
+
+        /* $checkifdescisutf8 = mb_detect_encoding($this->description, 'UTF-8', true);
+
+        $encoded_desc_from_utf8 = utf8_encode($this->description);
+
+        return ["desc" => $encoded_desc_from_utf8]; */
+
         return [
             'type' => 'Eintrag',
             'id' => $this->id,
             'definition' => $this->definition,
-            'description' => substr($this->description, 0, 40) . '...',
-            'date' => $this->date,
+            //'description' => $this->description,
+            'description' => $formatted_desc,
+            'date' => $formatted_date,
             'fine' => $this->fine,
             'isRestricted' => false,
             'isRestricted_Normal' => $this->isRestricted,

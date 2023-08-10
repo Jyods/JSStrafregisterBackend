@@ -34,12 +34,14 @@ class CaseResource extends JsonResource
         $publishes = $class >= 10 ? PublishResource::collection(Publish::where('fileID', $this->id)->get()) : 'Restricted';
 
         if ($this->restrictionClass <= $class) {
+            $formatted_date = date('d.m.Y', strtotime($this->date));
+
             return [
                 'type' => 'Eintrag',
                 'id' => $this->id,
                 'definition' => $this->definition,
                 'description' => $this->description,
-                'date' => $this->date,
+                'date' => $formatted_date,
                 'fine' => $this->fine,
                 'isRestricted' => $this->isRestricted,
                 'restrictionClass' => $this->restrictionClass,

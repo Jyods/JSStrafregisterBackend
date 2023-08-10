@@ -32,7 +32,7 @@ class FireMajorMessage implements ShouldBroadcastNow
      */
     public function broadcastOn(): array
     {
-        return ['major-channel'];
+        return ['message-channel'];
     }
 
     public function broadcastAs()
