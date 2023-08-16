@@ -39,6 +39,14 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
+        $permissions = $request->permissions;
+        foreach ($permissions as $key => $value) {
+            if ($value == true) {
+                $permissions[$key] = 1;
+            } else {
+                $permissions[$key] = 0;
+            }
+        }
         $old_values = User::find($request->id);
         $user = User::find($request->id);
         $user->email = $request->email ?? $user->email;
@@ -47,6 +55,11 @@ class UserController extends Controller
         $user->isActive = $request->isActive ?? $user->isActive;
         $user->restrictionClass = $request->restrictionClass ?? $user->restrictionClass;
         $user->rank_id = $request->rank_id ?? $user->rank_id;
+        $user->permission_register = $permissions['permission_register'] ?? $user->permission_register;
+        $user->permission_creator = $permissions['permission_creator'] ?? $user->permission_creator;
+        $user->permission_recruiter = $permission['permission_recruiter'] ?? $user->permission_recruiter;
+        $user->permission_broadcaster = $permissions['permission_broadcaster'] ?? $user->permission_broadcaster;
+        $user->permission_allchat = $permissions['permission_allchat'] ?? $user->permission_allchat;
         $user->save();
         try {
             Mail::to($user->email)->send(new UpdateEmail($old_values, $user, $request->user()->identification));

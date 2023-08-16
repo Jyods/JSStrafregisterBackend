@@ -60,6 +60,7 @@ class LoginController extends Controller
                 'permission_brodcaster' => $user->permission_broadcaster,
                 'permission_admin' => $user->permission_admin,
                 'permission_superadmin' => $user->permission_superadmin,
+                'permission_allchat' => $user->permission_allchat,
             ]
         ];
         return response()->json(['data' => $permissions], 200);

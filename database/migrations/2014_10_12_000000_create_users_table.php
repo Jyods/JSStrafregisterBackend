@@ -33,6 +33,7 @@ return new class extends Migration
             $table->boolean('permission_broadcaster')->default(false);
             $table->boolean('permission_admin')->default(false);
             $table->boolean('permission_superadmin')->default(false);
+            $table->boolean('permission_allchat')->default(true);
             $table->timestamps();
         });
     }
