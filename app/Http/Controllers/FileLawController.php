@@ -23,6 +23,7 @@ class FileLawController extends Controller
         $filelaw = new FileLaw();
         $filelaw->file_id = $request->file_id;
         $law = Law::where('Paragraph', $request->paragraph)->first();
+        //return $law;
         $filelaw->law_id = $law->id;
         $filelaw->save();
         return new FileLawResource($filelaw);

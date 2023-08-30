@@ -13,6 +13,7 @@ use App\Models\FileLaw;
 use App\Models\Rank;
 use App\Models\Institution;
 use App\Models\Permission;
+use App\Models\Logistic;
 
 class DatabaseSeeder extends Seeder
 {
@@ -138,7 +139,6 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
-        //erstelle eine Variable mit einem Array voller Rang Objekten
         $ranks = [
             (object) [
                 'rank' => 'Private',
@@ -325,7 +325,61 @@ class DatabaseSeeder extends Seeder
             ]
             ];
 
-        //Create as much ranks as there are in the array
+        $logistics = [
+            (object) [
+                'name' => 'LAAT/i',
+                'description' => 'Der Low Altitude Assault Transport/infantry (kurz: LAAT/i) ist ein von Rothana Heavy Engineering für die Große Armee der Republik entwickelter und produzierter Transporter.',
+                'stock' => '10',
+                'ordered' => '0',
+                'inUse' => '7',
+                'price' => '85000',
+            ],
+            (object) [
+                'name' => 'LAAT/c',
+                'description' => 'Der Low Altitude Assault Transport/carrier (kurz: LAAT/c) ist ein von Rothana Heavy Engineering für die Große Armee der Republik entwickelter und produzierter Transporter.',
+                'stock' => '5',
+                'ordered' => '0',
+                'inUse' => '0',
+                'price' => '58000',
+            ],
+            (object) [
+                'name' => 'TX-130',
+                'description' => 'Der TX-130 Saber-Klasse Kampfpanzer ist ein von Rothana Heavy Engineering für die Große Armee der Republik entwickelter und produzierter Kampfpanzer.',
+                'stock' => '15',
+                'ordered' => '5',
+                'inUse' => '7',
+                'price' => '85000',
+            ],
+            (object) [
+                'name' => 'AT-TE',
+                'description' => 'Der All Terrain Tactical Enforcer (kurz: AT-TE) ist ein von Rothana Heavy Engineering für die Große Armee der Republik entwickelter und produzierter Kampfläufer.',
+                'stock' => '10',
+                'ordered' => '5',
+                'inUse' => '1',
+                'price' => '300000',
+            ],
+            (object) [
+                'name' => 'AT-RT',
+                'description' => 'Der All Terrain Recon Transport (kurz: AT-RT) ist ein von Kuat Drive Yards für die Große Armee der Republik entwickelter und produzierter Kampfläufer.',
+                'stock' => '33',
+                'ordered' => '7',
+                'inUse' => '3',
+                'price' => '15000',
+            ],
+        ];
+
+        foreach ($logistics as $logistic)
+        {
+            Logistic::factory()->create([
+                'name' => $logistic->name,
+                'description' => $logistic->description,
+                'stock' => $logistic->stock,
+                'ordered' => $logistic->ordered,
+                'inuse' => $logistic->inUse,
+                'price' => $logistic->price,
+            ]);
+        }
+
         foreach ($ranks as $rank) {
             Rank::factory()->create([
                 'rank' => $rank->rank,
@@ -334,7 +388,6 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        //Create first User with Password
         User::factory()->create([
             'name' => 'CT-6659',
             'email' => 'test@test.com',
@@ -358,7 +411,6 @@ class DatabaseSeeder extends Seeder
             'discord' => '345665041477140490'
         ]);
 
-        //Entry and Member factory has File factory
         Entry::factory()->count(20)->create();
         User::factory()->count(5)->create();
 
@@ -393,6 +445,8 @@ class DatabaseSeeder extends Seeder
         }
 
         Permission::factory(10)->create();
+
+        //Logistic::factory(10)->create();
 
 
         /*Member::factory()
