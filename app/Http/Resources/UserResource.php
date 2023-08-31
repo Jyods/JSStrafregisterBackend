@@ -16,6 +16,7 @@ class UserResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $entry = date('d.m.Y', strtotime($this->entry));
         return [
             'id' => $this->id,
             'type' => 'Beamter',
@@ -25,8 +26,7 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'name' => $this->name,
             //'password' => $this->password,
-            'entry' => $this->entry,
-            //get the rank name from the rank_id
+            'entry' => $entry,
             'discord' => $this->discord,
             'rank_id' => $this->rank_id,
             'rank' => new RankResource($this->rank),
