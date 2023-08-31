@@ -38,7 +38,7 @@ class LoginController extends Controller
         if (!$user->isActive) {
             return response()->json(['message' => 'User is not active'], 401);
         }
-        return response()->json(['data' => $user], 200);
+        return new UserResource($user);
     }
     public function showLogin()
     {
