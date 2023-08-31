@@ -25,6 +25,7 @@ class EntryResource extends JsonResource
             'id' => $this->id,
             'type' => 'Straftaeter',
             'identification' => $this->identification,
+            'isWanted' => $this->isWanted ? true : false,
             //add files that belongs to the entry, when the user restrictionClass is lower or equal to the file restrictionClass show the text, else show "Restricted"
             'files' => $this->files->map(function ($file) {
                 $class = LoginController::getUser();

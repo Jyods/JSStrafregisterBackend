@@ -93,6 +93,7 @@ Route::prefix('/strafregister')->group(function () {
     Route::prefix('/entries')->controller(EntryController::class)->group(function () {
         Route::get('/index', 'index')->middleware('auth:sanctum');
         Route::get('/index/{id}', 'id')->middleware('auth:sanctum');
+        Route::post('/switchWanted/{id}', 'changeWanted')->middleware('auth:sanctum');
         Route::post('/create', 'store');
         Route::put('/{id}', 'App\Http\Controllers\EntryController@update');
         Route::delete('/{id}', 'App\Http\Controllers\EntryController@destroy');

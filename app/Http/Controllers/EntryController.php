@@ -7,6 +7,8 @@ use App\Models\Entry;
 use App\Http\Resources\EntryResource;
 use App\Http\Resources\OnlyEntryResource;
 
+use App\Events\FireMinorMessage;
+
 class EntryController extends Controller
 {
     public function index(Request $request)
@@ -36,5 +38,12 @@ class EntryController extends Controller
     }
     public function onlyEntry() {
         return OnlyEntryResource::collection(Entry::all());
+    }
+    public function changeWanted(int $id) {
+        $entry = Entry::find($id);
+        $entry->isWanted = !$entry->isWanted;
+        $entry->save();
+        event(new FireMinorMessage($entry->isWanted ? 'Eintrag ' . $id . ' wurde zur Fahndung hinzugefügt' : 'Eintrag ' . $id . ' wurde von der Fahndung entfernt'));
+        return new EntryResource($entry);
     }
 }
