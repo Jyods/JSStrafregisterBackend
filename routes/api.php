@@ -19,6 +19,9 @@ use App\Http\Controllers\OfficialDocumentPublishController;
 use App\Http\Controllers\OfficialDocumentArchiveController;
 use App\Http\Controllers\OfficialDocumentReplyController;
 use App\Http\Controllers\AllchatController;
+use App\Http\Controllers\HealthController;
+use App\Http\Controllers\PatientController;
+
 
 use App\Http\Controllers\LogisticController;
 
@@ -42,47 +45,6 @@ use App\Events\FireAllchatMessage;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                               Justice                                                 //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-//                                                                                                       //
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-Route::prefix('/strafregister')->group(function () {
-    Route::prefix('/files')->controller(FileController::class)->group(function () {
-        Route::get('/', 'index');
-        Route::get('/id/{id}', 'getid')->middleware('auth:sanctum');
-        Route::post('/create', 'store')->middleware('auth:sanctum');
-    });
-
-    Route::prefix('')->controller(LoginController::class)->group(function () {
-        Route::post('login', 'login');
-        Route::get('auth', 'checkAuth')->middleware('auth:sanctum');
-        Route::get('logout', 'logout')->middleware('auth:sanctum');
-        Route::get('secure', 'secureSite')->middleware('auth:sanctum');
-        Route::get('getPermissions', 'getRestrictionClass')->middleware('auth:sanctum');
-        Route::post('register', 'register')->middleware('auth:sanctum');
-        Route::get('switchActive/{id}', 'switchActive')->middleware('auth:sanctum');
-    });
-
-
-
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                       //
@@ -129,11 +91,11 @@ Route::prefix('/strafregister')->group(function () {
     });
 
 
-Route::prefix('/files')->controller(FileController::class)->group(function () {
-    Route::get('/', 'index');
-    Route::get('/id/{id}', 'getid')->middleware('auth:sanctum');
-    Route::post('/create', 'store')->middleware('auth:sanctum');
-});
+    Route::prefix('/files')->controller(FileController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/id/{id}', 'getid')->middleware('auth:sanctum');
+        Route::post('/create', 'store')->middleware('auth:sanctum');
+    });
 
     Route::prefix('/entries')->controller(EntryController::class)->group(function () {
         Route::get('/index', 'index')->middleware('auth:sanctum');
@@ -310,4 +272,41 @@ Route::prefix('/logistic')->controller(LogisticController::class)->group(functio
     Route::post('/', 'store')->middleware('auth:sanctum');
     Route::put('/{id}', 'update')->middleware('auth:sanctum');
     Route::delete('/{id}', 'destroy')->middleware('auth:sanctum');
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                               Health                                                  //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::prefix('/health')->group(function () {
+
+    Route::prefix('/patient')->controller(PatientController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'id');
+        Route::post('/', 'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+    });
+
+    Route::prefix('')->controller(HealthController::class)->group(function () {
+        Route::get('/', 'index');
+        // Route::get('/{id}', 'id');
+        Route::post('/', 'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+    });
 });

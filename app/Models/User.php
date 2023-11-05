@@ -55,4 +55,8 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Rank::class);
     }
+    public function healths()
+    {
+        return $this->hasMany(Health::class);
+    }
 }

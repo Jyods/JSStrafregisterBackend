@@ -14,6 +14,8 @@ use App\Models\Rank;
 use App\Models\Institution;
 use App\Models\Permission;
 use App\Models\Logistic;
+use App\Models\Health;
+use App\Models\Patient;
 
 class DatabaseSeeder extends Seeder
 {
@@ -445,6 +447,11 @@ class DatabaseSeeder extends Seeder
         }
 
         Permission::factory(10)->create();
+        
+        Patient::factory(10)->create();
+
+        Health::factory(10)->create();
+
 
         //Logistic::factory(10)->create();
 
