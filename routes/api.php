@@ -304,7 +304,7 @@ Route::prefix('/health')->group(function () {
 
     Route::prefix('')->controller(HealthController::class)->group(function () {
         Route::get('/', 'index');
-        // Route::get('/{id}', 'id');
+        Route::get('/{id}', 'id');
         Route::post('/', 'store');
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
