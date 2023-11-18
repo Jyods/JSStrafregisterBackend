@@ -28,6 +28,15 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
+
+        $department = $request->department;
+
+        $requester = $request->user();
+
+        if ($requester->department != $department && $requester->department != 'Admin') {
+            return response()->json(['message' => 'You are not allowed to create a user for this department'], 401);
+        }
+
         $user = new User();
         $user->email = $request->email;
         $user->password = $request->password;
@@ -39,6 +48,15 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
+
+        $department = $request->department;
+
+        $requester = $request->user();
+
+        if ($requester->department != $department && $requester->department != 'Admin') {
+            return response()->json(['message' => 'You are not allowed to update a user for this department'], 401);
+        }
+
         $permissions = $request->permissions;
         foreach ($permissions as $key => $value) {
             if ($value == true) {
@@ -55,6 +73,7 @@ class UserController extends Controller
         $user->isActive = $request->isActive ?? $user->isActive;
         $user->restrictionClass = $request->restrictionClass ?? $user->restrictionClass;
         $user->rank_id = $request->rank_id ?? $user->rank_id;
+        $user->department = $request->department ?? $user->department;
         $user->permission_register = $permissions['permission_register'] ?? $user->permission_register;
         $user->permission_creator = $permissions['permission_creator'] ?? $user->permission_creator;
         $user->permission_recruiter = $permission['permission_recruiter'] ?? $user->permission_recruiter;
