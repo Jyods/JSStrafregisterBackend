@@ -31,7 +31,9 @@ return new class extends Migration
             $table->boolean('permission_creator')->default(true);
             $table->boolean('permission_recruiter')->default(false);
             $table->boolean('permission_broadcaster')->default(false);
-            $table->boolean('permission_admin')->default(false);
+            $table->boolean('permission_odt')->default(false);
+            $table->boolean('permission_logisitcs')->default(false);
+            $table->boolean('permission_eventlead')->default(false);
             $table->boolean('permission_superadmin')->default(false);
             $table->boolean('permission_allchat')->default(true);
             $table->timestamps();

@@ -316,13 +316,13 @@ class DatabaseSeeder extends Seeder
                 'abbreviation' => 'RZIS',
             ],
             (object) [
-                'name' => 'Republikanisches Zentrum für Inneres und Integrität',
-                'description' => 'Das Republikanische Zentrum für Inneres und Integrität ist eine Organisation, die sich mit der inneren Sicherheit der Republik befasst.',
-                'abbreviation' => 'RZII',
+                'name' => 'Republikanisches Zentrum für Bildung und Wissenschaft',
+                'description' => 'Das Republikanische Zentrum für Bildung und Wissenschaft ist eine Organisation, die sich mit der Bildung und Wissenschaft der Republik befasst.',
+                'abbreviation' => 'RZBIW',
             ],
             (object) [
                 'name' => 'Republikanisches Zentrum für Äußere Angelegenheiten',
-                'description' => 'Das Republikanische Zentrum für Äußere Angelegenheiten ist eine Organisation, die sich mit der inneren Sicherheit der Republik befasst.',
+                'description' => 'Das Republikanische Zentrum für Äußere Angelegenheiten ist für die Außenpolitik der Republik zuständig.',
                 'abbreviation' => 'RZfA',
             ]
             ];
