@@ -22,6 +22,8 @@ use App\Http\Controllers\AllchatController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PatientController;
 
+use App\Http\Controllers\OrientationFileController;
+
 
 use App\Http\Controllers\LogisticController;
 
@@ -309,4 +311,34 @@ Route::prefix('/health')->group(function () {
         Route::put('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
     });
+});
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                         Orientations                                                  //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::prefix('/orientations')->group(function () {
+
+    Route::prefix('')->controller(OrientationFileController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'id');
+        Route::post('/', 'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+    });
+    
 });
