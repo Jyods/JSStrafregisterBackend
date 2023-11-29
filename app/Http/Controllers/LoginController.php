@@ -40,6 +40,14 @@ class LoginController extends Controller
         }
         return new UserResource($user);
     }
+    public function checkDepartment(string $department, Request $request)
+    {
+        $user = $request->user();
+        if ($user->department != $department && $user->department != 'Admin') {
+            return response()->json(['message' => 'You are not allowed to access this department'], 401);
+        }
+        return response()->json(['message' => 'You are allowed to access this department'], 200);
+    }
     public function showLogin()
     {
         return response()->json(['message' => 'Please login'], 401);
@@ -67,7 +75,7 @@ class LoginController extends Controller
     }
     public static function getUser() {
         $user = Auth::user();
-        return $user->restrictionClass;
+        return $user;
     }
     public function register(Request $request) {
         $user = new User();

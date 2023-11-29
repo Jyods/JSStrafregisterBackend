@@ -30,6 +30,7 @@ class UserResource extends JsonResource
             'discord' => $this->discord,
             'rank_id' => $this->rank_id,
             'rank' => new RankResource($this->rank),
+            'department' => $this->department,
             'permissions' => [
                 'permission_register' => $this->permission_register == 1 ? true : false,
                 'permission_creator' => $this->permission_creator == 1 ? true : false,

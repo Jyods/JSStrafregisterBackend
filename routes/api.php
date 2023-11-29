@@ -81,6 +81,7 @@ Route::prefix('/strafregister')->group(function () {
         Route::get('getPermissions', 'getRestrictionClass')->middleware('auth:sanctum');
         Route::post('register', 'register')->middleware('auth:sanctum');
         Route::get('switchActive/{id}', 'switchActive')->middleware('auth:sanctum');
+        Route::get('checkDepartment/{department}', 'checkDepartment')->middleware('auth:sanctum');
     });
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -173,7 +174,6 @@ Route::prefix('/strafregister')->group(function () {
             return response()->json(['message' => $ranks], 200);
         })->middleware('discord.bot');
 
-        #Erstelle eine Route die jeden entry und die anzahl an files die er hat zurückgibt
         Route::get('/entries', function (Request $request) {
             $entries = \App\Models\Entry::all();
             $data = [];
@@ -341,4 +341,40 @@ Route::prefix('/orientations')->group(function () {
         Route::delete('/{id}', 'destroy');
     });
     
+});
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                 GMod                                                  //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+//                                                                                                       //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Route::prefix('/gmod')->group(function () {
+    Route::get('/iswanted/{name}', function (Request $request, $name) {
+        $entry = \App\Models\Entry::where('identification', 'like', '%' . $name . '%')->first();
+        if ($entry) {
+            $builder = [
+                'message' => 'The Subject is wanted!',
+                'identification' => $entry->identification,
+                'filesCount' => $entry->files->count(),
+                'isWanted' => $entry->isWanted,
+            ];
+            return response()->json(['data' => $builder], 200);
+        } else {
+            return response()->json(['message' => 'No entry found.'], 404);
+        }
+    });
 });

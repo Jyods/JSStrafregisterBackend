@@ -30,6 +30,7 @@ class CaseResource extends JsonResource
         $str = $this->description;
         $str = preg_replace("/[a-zA-Z]/", "█", $str);
         $class = LoginController::getUser();
+        $class = $class->restrictionClass;
         
         $publishes = $class >= 10 ? PublishResource::collection(Publish::where('fileID', $this->id)->get()) : 'Restricted';
 
