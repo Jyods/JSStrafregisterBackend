@@ -7,6 +7,12 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 use App\Http\Resources\RankResource;
 
+use App\Models\Company;
+use App\Models\Rank;
+
+use App\Http\Resources\CompanyResource;
+use App\Http\Resources\SecurityLevelResource;
+
 class UserResource extends JsonResource
 {
     /**
@@ -39,7 +45,8 @@ class UserResource extends JsonResource
                 'permission_admin' => $this->permission_admin == 1 ? true : false,
                 'permission_superadmin' => $this->permission_superadmin == 1 ? true : false,
                 'permission_allchat' => $this->permission_allchat == 1 ? true : false,
-            ]
+            ],
+            'company' => $this->company_id != null ? new CompanyResource(Company::find($this->company_id)) : null,
         ];
     }
 }

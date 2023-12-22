@@ -16,4 +16,8 @@ class Rank extends Model
     {
         return $this->hasMany(File::class);
     }
+    public function securityLevel()
+    {
+        return $this->belongsTo(SecurityLevel::class);
+    }
 }

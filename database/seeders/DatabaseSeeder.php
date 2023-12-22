@@ -16,6 +16,9 @@ use App\Models\Permission;
 use App\Models\Logistic;
 use App\Models\Health;
 use App\Models\Patient;
+use App\Models\Publish;
+use App\Models\Company;
+use App\Models\SecurityLevel;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,6 +33,36 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        // Erstelle ein Sicherheitslevel
+
+        $securityLevels = [
+            (object) [
+                'level' => '1',
+                'abbreviation' => 'Delta',
+            ],
+            (object) [
+                'level' => '2',
+                'abbreviation' => 'Charlie-2',
+            ],
+            (object) [
+                'level' => '3',
+                'abbreviation' => 'Charlie-1',
+            ],
+            (object) [
+                'level' => '4',
+                'abbreviation' => 'Bravo',
+            ],
+            (object) [
+                'level' => '5',
+                'abbreviation' => 'Alpha',
+            ],
+            (object) [
+                'level' => '6',
+                'abbreviation' => 'Zulu',
+            ],
+        ];
+
         $laws = [
             (object) [
                 "Title" => "Beleidigung",
@@ -146,157 +179,306 @@ class DatabaseSeeder extends Seeder
                 'rank' => 'Private',
                 'kader' => 'Enlisted',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'PVT',
+                'level' => '1',
+                'security_level_id' => '1',
             ],
             (object) [
                 'rank' => 'Private First Class',
                 'kader' => 'Enlisted',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'PFC',
+                'level' => '2',
+                'security_level_id' => '1',
             ],
             (object) [
                 'rank' => 'Specialist',
                 'kader' => 'Enlisted',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'SPC',
+                'level' => '3',
+                'security_level_id' => '1',
             ],
             (object) [
                 'rank' => 'Lance Corporal',
                 'kader' => 'Enlisted',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'LCPL',
+                'level' => '4',
+                'security_level_id' => '1',
             ],
             (object) [
                 'rank' => 'Corporal',
                 'kader' => 'Junior NCO',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'CPL',
+                'level' => '5',
+                'security_level_id' => '2',
             ],
             (object) [
                 'rank' => 'Sergeant',
                 'kader' => 'Junior NCO',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'SGT',
+                'level' => '6',
+                'security_level_id' => '2',
             ],
             (object) [
                 'rank' => 'Staff Sergeant',
                 'kader' => 'Junior NCO',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'SSGT',
+                'level' => '7',
+                'security_level_id' => '2',
             ],
             (object) [
                 'rank' => 'Technical Sergeant',
                 'kader' => 'Senior NCO',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'TSGT',
+                'level' => '8',
+                'security_level_id' => '3',
             ],
             (object) [
                 'rank' => 'Master Sergeant',
                 'kader' => 'Senior NCO',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'MSGT',
+                'level' => '9',
+                'security_level_id' => '3',
             ],
             (object) [
                 'rank' => 'First Sergeant',
                 'kader' => 'Senior NCO',
                 'unit' => 'Clone Army',
+                'abbreviation' => '1SGT',
+                'level' => '10',
+                'security_level_id' => '3',
             ],
             (object) [
                 'rank' => 'Sergeant Major',
                 'kader' => 'Senior NCO',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'SGM',
+                'level' => '11',
+                'security_level_id' => '3',
             ],
             (object) [
                 'rank' => '2nd Lieutenant',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Clone Army',
+                'abbreviation' => '2LT',
+                'level' => '12',
+                'security_level_id' => '4',
             ],
             (object) [
                 'rank' => '1st Lieutenant',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Clone Army',
+                'abbreviation' => '1LT',
+                'level' => '13',
+                'security_level_id' => '4',
             ],
             (object) [
                 'rank' => 'Captain',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'CPT',
+                'level' => '14',
+                'security_level_id' => '4',
             ],
             (object) [
                 'rank' => 'Major',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'MAJ',
+                'level' => '15',
+                'security_level_id' => '5',
             ],
             (object) [
                 'rank' => 'Commander',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'CMD',
+                'level' => '16',
+                'security_level_id' => '5',
             ],
             (object) [
                 'rank' => 'Senior Commander',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'SCMD',
+                'level' => '17',
+                'security_level_id' => '5',
             ],
             (object) [
                 'rank' => 'Marshal Commander',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'MCMD',
+                'level' => '18',
+                'security_level_id' => '5',
             ],
             (object) [
                 'rank' => 'Colonel',
                 'kader' => 'High Command',
                 'unit' => 'Clone Army',
+                'abbreviation' => 'COL',
+                'level' => '19',
+                'security_level_id' => '6',
             ],
             (object) [
                 'rank' => 'Crewman',
                 'kader' => 'Enlisted',
                 'unit' => 'Navy',
+                'abbreviation' => 'CM',
+                'level' => '1',
+                'security_level_id' => '1',
             ],
             (object) [
                 'rank' => 'Petty Officer',
                 'kader' => 'Enlisted',
                 'unit' => 'Navy',
+                'abbreviation' => 'PO',
+                'level' => '2',
+                'security_level_id' => '1',
             ],
             (object) [
                 'rank' => 'Chief Petty Officer',
                 'kader' => 'Enlisted',
                 'unit' => 'Navy',
+                'abbreviation' => 'CPO',
+                'level' => '3',
+                'security_level_id' => '1',
             ],
             (object) [
                 'rank' => 'Warrent Officer',
                 'kader' => 'Junior NCO',
                 'unit' => 'Navy',
+                'abbreviation' => 'WO',
+                'level' => '4',
+                'security_level_id' => '2',
             ],
             (object) [
                 'rank' => 'Chief Warrent Officer',
                 'kader' => 'Junior NCO',
                 'unit' => 'Navy',
+                'abbreviation' => 'CWO',
+                'level' => '5',
+                'security_level_id' => '2',
             ],
             (object) [
                 'rank' => 'Ensign',
                 'kader' => 'Junior NCO',
                 'unit' => 'Navy',
+                'abbreviation' => 'ENS',
+                'level' => '6',
+                'security_level_id' => '2',
             ],
             (object) [
                 'rank' => 'Mindshipman',
                 'kader' => 'Senior NCO',
                 'unit' => 'Navy',
+                'abbreviation' => 'MSM',
+                'level' => '7',
+                'security_level_id' => '3',
             ],
             (object) [
                 'rank' => 'Lieutenant',
                 'kader' => 'Senior NCO',
                 'unit' => 'Navy',
+                'abbreviation' => 'LT',
+                'level' => '8',
+                'security_level_id' => '3',
             ],
             (object) [
                 'rank' => 'Lieutenant Commander',
                 'kader' => 'Senior NCO',
                 'unit' => 'Navy',
+                'abbreviation' => 'LTC',
+                'level' => '9',
+                'security_level_id' => '3',
             ],
             (object) [
                 'rank' => 'Commander',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Navy',
+                'abbreviation' => 'CMD',
+                'level' => '10',
+                'security_level_id' => '4',
             ],
             (object) [
                 'rank' => 'Captain',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Navy',
+                'abbreviation' => 'CPT',
+                'level' => '11',
+                'security_level_id' => '5',
             ],
             (object) [
                 'rank' => 'Commodore',
                 'kader' => 'Commissioned Officer',
                 'unit' => 'Navy',
-            ]
+                'abbreviation' => 'COM',
+                'level' => '12',
+                'security_level_id' => '6',
+            ],
+            (object) [
+                'rank' => 'Administration',
+                'kader' => 'Administration',
+                'unit' => 'Administration',
+                'abbreviation' => 'ADM',
+                'level' => '100',
+                'security_level_id' => '6',
+            ],
+        ];
+
+        $companies = [
+            (object) [
+                'company' => '1st Infantry Company',
+                'abbreviation' => '1st',
+                'highestLevel' => '18',
+            ],
+            (object) [
+                'company' => '14th Infantry Company',
+                'abbreviation' => '14th',
+                'highestLevel' => '12',
+            ],
+            (object) [
+                'company' => '8th Medic Company',
+                'abbreviation' => '8th',
+                'highestLevel' => '12',
+            ],
+            (object) [
+                'company' => '23rd Pilot Company',
+                'abbreviation' => '23rd',
+                'highestLevel' => '12',
+            ],
+            (object) [
+                'company' => '5th Scout Company',
+                'abbreviation' => '5th',
+                'highestLevel' => '12',
+            ],
+            (object) [
+                'company' => '13th Element Navy',
+                'abbreviation' => 'Navy',
+                'highestLevel' => '12',
+            ],
+            (object) [
+                'company' => 'Engineering Corps',
+                'abbreviation' => 'EC',
+                'highestLevel' => '12',
+            ],
+            (object) [
+                'company' => 'Shock Trooper',
+                'abbreviation' => 'ST',
+                'highestLevel' => '12',
+            ],
+            (object) [
+                'company' => 'Republikanisches Zentrum für Informationstechnologie',
+                'abbreviation' => 'RZIT',
+                'highestLevel' => '19',
+            ],
         ];
 
         $institutions = [
@@ -324,7 +506,17 @@ class DatabaseSeeder extends Seeder
                 'name' => 'Republikanisches Zentrum für Äußere Angelegenheiten',
                 'description' => 'Das Republikanische Zentrum für Äußere Angelegenheiten ist für die Außenpolitik der Republik zuständig.',
                 'abbreviation' => 'RZfA',
-            ]
+            ],
+            (object) [
+                'name' => 'Republikanisches Zentrum für Gesundheit',
+                'description' => 'Das Republikanische Zentrum für Gesundheit ist eine Organisation, die sich mit der Gesundheit der Republik befasst.',
+                'abbreviation' => 'RZG',
+            ],
+            (object) [
+                'name' => 'Republikanisches Zentrum für Informationstechnologie',
+                'description' => 'Das Republikanische Zentrum für Informationstechnologie ist eine Organisation, die sich mit der Informationstechnologie der Republik befasst.',
+                'abbreviation' => 'RZIT',
+            ],
             ];
 
         $logistics = [
@@ -370,6 +562,21 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        foreach ($securityLevels as $securityLevel) {
+            SecurityLevel::factory()->create([
+                'level' => $securityLevel->level,
+                'abbreviation' => $securityLevel->abbreviation,
+            ]);
+        }
+
+        foreach ($companies as $company) {
+            Company::factory()->create([
+                'company' => $company->company,
+                'abbreviation' => $company->abbreviation,
+                'highestLevel' => $company->highestLevel,
+            ]);
+        }
+
         foreach ($logistics as $logistic)
         {
             Logistic::factory()->create([
@@ -387,6 +594,9 @@ class DatabaseSeeder extends Seeder
                 'rank' => $rank->rank,
                 'kader' => $rank->kader,
                 'unit' => $rank->unit,
+                'abbreviation' => $rank->abbreviation,
+                'level' => $rank->level,
+                'security_level_id' => $rank->security_level_id,
             ]);
         }
 
@@ -396,6 +606,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'identification' => 'CT-6659',
             'restrictionClass' => '10',
+            'company_id' => '1',
             'isActive' => True,
             'rank_id' => '15',
             'discord' => '821117158012354570',
@@ -408,6 +619,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'identification' => 'Jyods',
             'restrictionClass' => '2',
+            'company_id' => '1',
             'isActive' => True,
             'rank_id' => '1',
             'discord' => '345665041477140490'

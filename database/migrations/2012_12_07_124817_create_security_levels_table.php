@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ranks', function (Blueprint $table) {
+        Schema::create('security_levels', function (Blueprint $table) {
             $table->id();
-            $table->string('rank');
-            $table->string('abbreviation')->nullable();
-            $table->integer('level')->nullable();
-            $table->foreignId('security_level_id')->constrained()->nullable();
-            $table->string('kader');
-            $table->string('unit');
+            $table->string('level');
+            $table->string('abbreviation');
             $table->timestamps();
         });
     }
@@ -28,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ranks');
+        Schema::dropIfExists('security_levels');
     }
 };

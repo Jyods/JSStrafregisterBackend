@@ -18,9 +18,10 @@ return new class extends Migration
             $table->boolean('is_active')->default(true);
             $table->enum('type', ['Allgemeines', 'Leitfäden', 'Training', "Sonstiges"]);
             $table->string('created_by');
-            $table->string('updated_by');
-            $table->foreignId('rank_id')->constrained()->nullable();
-            $table->foreignId('user_id')->constrained()->nullable();
+            $table->string('updated_by')->nullable();
+            $table->foreignId('rank_id')->nullable()->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('company_id')->nullable()->constrained();
             $table->timestamps();
         });
     }

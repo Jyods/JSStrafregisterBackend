@@ -22,7 +22,10 @@ use App\Http\Controllers\AllchatController;
 use App\Http\Controllers\HealthController;
 use App\Http\Controllers\PatientController;
 
+use App\Http\Controllers\CompanyController;
+
 use App\Http\Controllers\OrientationFileController;
+use App\Http\Controllers\OrientationFilePermissionController;
 
 
 use App\Http\Controllers\LogisticController;
@@ -73,6 +76,14 @@ Route::prefix('/strafregister')->group(function () {
         Route::post('/create', 'store')->middleware('auth:sanctum');
     });
 
+    Route::prefix('/company')->controller(CompanyController::class)->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{id}', 'id');
+        Route::post('/', 'store');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy');
+    });
+
     Route::prefix('')->controller(LoginController::class)->group(function () {
         Route::post('login', 'login');
         Route::get('auth', 'checkAuth')->middleware('auth:sanctum');
@@ -86,11 +97,8 @@ Route::prefix('/strafregister')->group(function () {
 
     Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
         $user = $request->user();
-        $data = [
-            'user' => $user,
-            'rank' => $user->rank,
-        ];
-        return $user;
+        // returne die user resource
+        return new \App\Http\Resources\UserResource($user);
     });
 
 
@@ -334,13 +342,24 @@ Route::prefix('/health')->group(function () {
 Route::prefix('/orientations')->group(function () {
 
     Route::prefix('')->controller(OrientationFileController::class)->group(function () {
-        Route::get('/', 'index');
-        Route::get('/{id}', 'id');
-        Route::post('/', 'store');
-        Route::put('/{id}', 'update');
-        Route::delete('/{id}', 'destroy');
+        Route::get('/', 'index')->middleware('auth:sanctum');
+        Route::get('/permitted', 'get_permittet_files')->middleware('auth:sanctum');
+        Route::get('/{id}', 'id')->middleware('auth:sanctum');
+        Route::post('/', 'store')->middleware('auth:sanctum');
+        Route::put('/{id}', 'update')->middleware('auth:sanctum');
+        Route::delete('/{id}', 'destroy')->middleware('auth:sanctum');
     });
     
+    Route::prefix('/permission')->controller(OrientationFilePermissionController::class)->group(function () {
+        Route::get('/', 'index')->middleware('auth:sanctum');
+        Route::get('/{id}', 'id')->middleware('auth:sanctum');
+        Route::get('/user/{id}', 'get_all_by_user_id')->middleware('auth:sanctum');
+        Route::get('/orientation_file/{id}', 'get_all_by_orientation_file_id')->middleware('auth:sanctum');
+        Route::post('/', 'store')->middleware('auth:sanctum');
+        Route::put('/{id}', 'update');
+        Route::delete('/{id}', 'destroy')->middleware('auth:sanctum');
+    });
+
 });
 
 

@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ranks', function (Blueprint $table) {
+        Schema::create('orientation_file_permissions', function (Blueprint $table) {
             $table->id();
-            $table->string('rank');
-            $table->string('abbreviation')->nullable();
-            $table->integer('level')->nullable();
-            $table->foreignId('security_level_id')->constrained()->nullable();
-            $table->string('kader');
-            $table->string('unit');
+            $table->foreignId('orientation_file_id')->constrained();
+            $table->foreignId('user_id')->nullable()->constrained();
+            $table->foreignId('company_id')->nullable()->constrained();
+            $table->foreignId('granted_by')->constrained('users');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ranks');
+        Schema::dropIfExists('orientation_file_permissions');
     }
 };
