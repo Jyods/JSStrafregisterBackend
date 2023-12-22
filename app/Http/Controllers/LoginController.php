@@ -88,6 +88,7 @@ class LoginController extends Controller
         $user->restrictionClass = $request->restrictionClass ?? 1;
         //get rank_id from rank object
         $user->rank_id = $request->rank_id;
+        $user->company_id = $request->company_id;
         $user->save();
         //versuche email zu senden, wenn es nicht geht, dann ist es nicht schlimm
         try {
