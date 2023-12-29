@@ -70,6 +70,9 @@ class OrientationFileController extends Controller
 
     function update(Request $request, int $id)
     {
+        if ($request->user()->id != OrientationFile::findOrFail($id)->user_id) {
+            return response()->json(['message' => 'You are not the creator of this file'], 401);
+        }
         $user = $request->user();
         $orientation_file = OrientationFile::findOrFail($id);
         $orientation_file->name = $request->name ?? $orientation_file->name;
