@@ -9,6 +9,9 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use App\Http\Resources\FileResource;
 use App\Http\Controllers\LoginController;
 
+use App\Http\Resources\PublishResource;
+use App\Models\Publish;
+
 class EntryResource extends JsonResource
 {
     /**
@@ -22,9 +25,11 @@ class EntryResource extends JsonResource
             'id' => $this->id,
             'type' => 'Straftaeter',
             'identification' => $this->identification,
+            'isWanted' => $this->isWanted ? true : false,
             //add files that belongs to the entry, when the user restrictionClass is lower or equal to the file restrictionClass show the text, else show "Restricted"
             'files' => $this->files->map(function ($file) {
                 $class = LoginController::getUser();
+                $class = $class->restrictionClass;
                 if ($file->restrictionClass <= $class) {
                     return new FileResource($file);
                 } else {
@@ -40,6 +45,7 @@ class EntryResource extends JsonResource
                         'created_at' => 'Restricted',
                         'updated_at' => 'Restricted',
                         'user' => 'Restricted',
+                        'publishes' => PublishResource::collection(Publish::where('fileID', $file->id)->get()),
                     ];
                 }
             }),

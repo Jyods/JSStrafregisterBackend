@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
             $table->string('identification');
+            $table->boolean('isWanted')->default(0);
             $table->timestamps();
         });
     }

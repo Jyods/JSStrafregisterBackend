@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('ranks', function (Blueprint $table) {
             $table->id();
             $table->string('rank');
+            $table->string('abbreviation')->nullable();
+            $table->integer('level')->nullable();
+            $table->foreignId('security_level_id')->constrained()->nullable();
             $table->string('kader');
             $table->string('unit');
             $table->timestamps();

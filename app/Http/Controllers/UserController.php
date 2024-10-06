@@ -28,6 +28,15 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
+
+        $department = $request->department;
+
+        $requester = $request->user();
+
+        if ($requester->department != $department && $requester->department != 'Admin') {
+            return response()->json(['message' => 'You are not allowed to create a user for this department'], 401);
+        }
+
         $user = new User();
         $user->email = $request->email;
         $user->password = $request->password;
@@ -39,6 +48,23 @@ class UserController extends Controller
     }
     public function update(Request $request)
     {
+
+        $company_id = $request->company_id;
+
+        $requester = $request->user();
+
+        if ($requester->company_id != $company_id && $requester->department != 9) {
+            return response()->json(['message' => 'You are not allowed to update a user for this company'], 401);
+        }
+
+        $permissions = $request->permissions;
+        foreach ($permissions as $key => $value) {
+            if ($value == true) {
+                $permissions[$key] = 1;
+            } else {
+                $permissions[$key] = 0;
+            }
+        }
         $old_values = User::find($request->id);
         $user = User::find($request->id);
         $user->email = $request->email ?? $user->email;
@@ -47,8 +73,17 @@ class UserController extends Controller
         $user->isActive = $request->isActive ?? $user->isActive;
         $user->restrictionClass = $request->restrictionClass ?? $user->restrictionClass;
         $user->rank_id = $request->rank_id ?? $user->rank_id;
+        $user->permission_register = $permissions['permission_register'] ?? $user->permission_register;
+        $user->permission_creator = $permissions['permission_creator'] ?? $user->permission_creator;
+        $user->permission_recruiter = $permission['permission_recruiter'] ?? $user->permission_recruiter;
+        $user->permission_broadcaster = $permissions['permission_broadcaster'] ?? $user->permission_broadcaster;
+        $user->permission_allchat = $permissions['permission_allchat'] ?? $user->permission_allchat;
         $user->save();
-        //Mail::to($user->email)->send(new UpdateEmail($old_values, $user, $request->user()->identification));
+        try {
+            Mail::to($user->email)->send(new UpdateEmail($old_values, $user, $request->user()->identification));
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
         return new UserResource($user);
     }
 }

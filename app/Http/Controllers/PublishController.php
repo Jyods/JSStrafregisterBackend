@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Resources\PublishResource;
 
+use App\Events\StatusRequest;
+
 class PublishController extends Controller
 {
     /**
@@ -14,7 +16,12 @@ class PublishController extends Controller
      */
     public function index()
     {
-        //
+        //get all publishes with the publish Resource
+        $publishes = PublishResource::collection(Publish::all());
+
+        return response()->json([
+            'message' => $publishes,
+        ], 200);
     }
 
     /**
@@ -51,6 +58,9 @@ class PublishController extends Controller
         $publish->save();
 
 
+        //sende eine Broadcast Nachricht an den Channel test-channel
+        broadcast(new StatusRequest('The User: ' . $user->identification . ' created a new public entry.'))->toOthers();
+
         return response()->json([
             'message' => 'You are allowed to publish',
             'route' => $uid,
@@ -62,14 +72,10 @@ class PublishController extends Controller
 
     public function id(Request $request, string $route)
     {
-        //get the publish from the request route with the publish Resource
-        $publish = PublishResource::collection(Publish::where('route', $route)->get());
+        //get the first publish from the request route with the publish Resource
+        $publish = PublishResource::collection(Publish::where('route', $route)->get())->first();
+        
 
-        return response()->json([
-            'message' => $publish,
-        ], 200);
-
-        $publish = Publish::where('route', $route)->first();
         if ($publish == null) {
             return response()->json([
                 'message' => 'Publish not found',
@@ -116,8 +122,29 @@ class PublishController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Publish $publish)
+    public function destroy(Request $request, string $id)
     {
-        //
+        //check if the user is allowed to delete
+        $user = $request->user();
+        if ($user->restrictionClass < 10) {
+            return response()->json([
+                'message' => 'You are not allowed to delete',
+            ], 403);
+        }
+        //get the publish from the request id
+        $publish = Publish::find($id);
+        if ($publish == null) {
+            return response()->json([
+                'message' => 'Publish not found',
+            ], 404);
+        }
+
+        //delete the publish
+        $publish->delete();
+
+        return response()->json([
+            'message' => 'Publish deleted',
+        ], 200);
+    
     }
 }

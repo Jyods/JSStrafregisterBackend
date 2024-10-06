@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\FileRequest;
 use App\Http\Resources\CaseResource;
 use App\Models\File;
+use App\Models\Entry;
 
 use App\Http\Resources\FileResource;
 
@@ -33,6 +34,13 @@ class FileController extends Controller
         $file->entry_id = $request->entry_id;
         $file->rank_id = $request->rank_id;
         $file->save();
+
+        if ($request->isWanted) {
+            $entry = Entry::find($request->entry_id);
+            $entry->isWanted = true;
+            $entry->save();
+        }
+
         return $file;
     }
     public function createtestdata()
