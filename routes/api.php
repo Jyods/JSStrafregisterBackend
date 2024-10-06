@@ -166,3 +166,10 @@ Route::prefix('/publish')->controller(PublishController::class)->group(function 
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'destroy');
 });
+
+Route::prefix('/event')->group(function () {
+    Route::get('/test', function (Request $request) {
+        event(new \App\Events\StatusLiked());
+        return response()->json(['message' => 'Passed'], 200);
+    });
+});
